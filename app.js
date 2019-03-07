@@ -1,7 +1,7 @@
 const express = require("express");
 const fetch = require("node-fetch");
 
-const wiki = require("./server/wikiSearch.js")
+const wiki = require("./server/wikiAPI.js")
 
 const app = express();
 
@@ -10,7 +10,7 @@ app.use("/", express.static("client"));
 app.get("/wiki", function(req, resp){
 	search = req.query.q;
 
-	wiki(search);
+	wiki.search(search);
 
 	resp.send("working")
 
