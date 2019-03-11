@@ -1,39 +1,30 @@
 const express = require("express");
 const fetch = require("node-fetch");
+const seedrandom = require("seedrandom");
 
-const wiki = require("./server/wikiAPI.js")
+const people = require("./server/people.js");
 
 const app = express();
 
 app.use("/", express.static("client"));
 
-app.get("/wiki", function(req, resp){
+app.get("/people", function(req, resp){
 	search = req.query.q;
 
-	wiki.search(search);
-
-	resp.send("working")
-
-
-
-	// fetch("https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=" + search)
-	// .then(response => response.text())
-	// .then((body) => {
-	// 	let obj = JSON.parse(body).query.search;
-
-	// 	// console.log(obj);
-	// 	// resp.send()
-
-	// 	let string = ""
-
-	// 	for(let i = 0, length = obj.length; i < length; i += 1) {
-	// 		string += obj[i].pageid + ", "
-	// 	}
-
-	// 	resp.send(string);
-	// })
-
-	// // resp.send(req.query)
+	people.search(search, (data) => {
+		resp.send(data)
+	});
 });
+
+app.get("/test", function(req,resp) {
+	people.getPageInfo(736, (data) => {
+		resp.send(data)
+	})
+})
+
+app.get("/random", function(req, resp){
+	var rng = seedrandom("hello")
+	resp.send(rng().toString() + " " + rng().toString())
+})
 
 module.exports = app;

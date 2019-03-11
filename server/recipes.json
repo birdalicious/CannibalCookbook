@@ -1,0 +1,311 @@
+{
+	"generators": [
+		{
+			"title": "(*) panzanella",
+			"intro": "This recipe is all about sharing flavours. The bread soaks up the herby roasting juices of the (*) to give you the crunchiest, most delicious croutons ever.",
+			"image": "https://img.jamieoliver.com/jamieoliver/recipe-database/xtra_med/46257803.jpg?tr=w-400",
+			"serves": 8,
+			"cooksIn": 100,
+			"ingredients": [
+				{
+					"name": "whole free-range chicken",
+					"quantity": "1.5kg"
+				},
+				{
+					"name": "olive oil",
+					"quantity": ""
+				},
+				{
+					"name": "bunch of fresh mixed herbs, such as sage, rosemary and thyme",
+					"quantity": ""
+				},
+				{
+					"name": "ciabatta loaf",
+					"quantity": "270g"
+				},
+				{
+					"name": "garlic",
+					"quantity": "1 bulb of"
+				},
+				{
+					"name": "mixed ripe tomatoes",
+					"quantity": "2kg"
+				},
+				{
+					"name": "fresh basil",
+					"quantity": "1 bunch of"
+				},
+				{
+					"name": "small red onion",
+					"quantity": "1"
+				},
+				{
+					"name": "red wine vinegar",
+					"quantity": ""
+				},
+				{
+					"name": "whole black olives",
+					"quantity": "100g"
+				},
+				{
+					"name": "baby capers",
+					"quantity": "2 tablespoons"
+				},
+				{
+					"name": "Parmesan cheese",
+					"quantity": ""
+				}
+			],
+			"method": [
+				"Preheat the oven to 180ºC/350ºC/gas 4.",
+				"Rub the (*) all over with sea salt, black pepper and oil, and stuff with the herbs, reserving some rosemary for later.",
+				"Tear up the ciabatta and scatter in a roasting tin. Crush and add the unpeeled garlic cloves, and place the (*) on top.",
+				"Roast for 1 hour 30 minutes, or until cooked through and the juices run clear when the (*) is pierced with a skewer.",
+				"Remove from the oven, cover and leave to rest.",
+				"Roughly chop the tomatoes into different shapes and sizes. Keep half to one side and add the rest to a large bowl with half of the basil leaves. Keep the remaining leaves for later.",
+				"Peel, finely slice and add the onion to the bowl along with a good splash of red wine vinegar. Scrunch the whole lot together with your hands. You want to end up with a colourful, tasty pulp. Taste and season, if necessary.",
+				"Add 4 tablespoons of red wine vinegar with 2 tablespoons of olive oil and a pinch of black pepper, then give it all a good stir.",
+				"Take the bread from the roasting tray and add most of it to the bowl (reserving a few pieces), and toss together really well.",
+				"Destone and chop up the olives, and add to the bowl along with the capers and remaining tomatoes, bread and basil leaves.",
+				"Mix gently to bring it all together and finish with a sprinkling of rosemary leaves and shavings of Parmesan.",
+				"Carve the (*) and serve with the panzanella."
+			] 
+		},
+		{
+			"title": "Crusted (*) rack with rhubarb",
+			"intro": "This almond- and herb-coated (*) gives a twist to your Sunday roast.",
+			"image": "https://img.jamieoliver.com/jamieoliver/recipe-database/xtra_med/8nZC6iqSa_F8eDuZ8HEIeA.jpg?tr=w-400",
+			"serves": 6,
+			"cooksIn": 50,
+			"ingredients": [
+				{
+					"name": "rhubarb",
+					"quantity": "750g"
+				},
+				{
+					"name": "runny honey",
+					"quantity": "6 tablespoons"
+				},
+				{
+					"name": "olive oil",
+					"quantity": ""
+				},
+				{
+					"name": "whole or flaked almonds",
+					"quantity": "75g"
+				},
+				{
+					"name": "fresh mixed herbs , such as parsley, mint or chives",
+					"quantity": "1 bunch of"
+				},
+				{
+					"name": "breadcrumbs",
+					"quantity": "1 handful of"
+				},
+				{
+					"name": "racks of (*)",
+					"quantity": "2"
+				},
+				{
+					"name": "Dijon mustard",
+					"quantity": "2 tablespoons"
+				}
+			],
+			"method": [
+				"Preheat the oven to 200ºC/gas 6.",
+				"Slice the rhubarb into 5cm pieces and place in a roasting tray. Drizzle over the honey and a good lug of oil, mix well, then spread out evenly over the pan.",
+				"Blitz the almonds in a food processor with the herb leaves, then transfer to a bowl. Stir in the breadcrumbs and season.",
+				"Using a sharp knife, score the fat on (*), rub in the mustard, then pat on the breadcrumb mix.",
+				"Place the (*) on the rhubarb, drizzle with oil and cook for 22 to 35 minutes for medium, or a further 5 to 10 minutes for well done.",
+				"Rest for 5 to 10 minutes, then carve into cutlets and serve with the rhubarb."
+			]
+		},
+		{
+			"title": "Spring (*) & citrus stew",
+			"intro":"This is a brilliant transitional dish. You’ve got the stew element, which is warming, comforting and exactly what you want during the colder months, but there are loads of fresh colours and flavours to remind you what’s around the corner at this time of year. The lemon and egg sauce you stir through at the end is something I first saw added to Greek stews. I know it might sound a bit unusual, but the results will make you sit up and smile.",
+			"image": "https://img.jamieoliver.com/jamieoliver/recipe-database/xtra_med/3TiRvISsawYAwqa4Xy7PMd.jpg?tr=w-400",
+			"serves": 6,
+			"cooksIn": 95,
+			"ingredients": [
+				{
+					"name": "(*)",
+					"quantity": ""
+				},
+				{
+					"name": "olive oil",
+					"quantity": ""
+				},
+				{
+					"name": "garlic",
+					"quantity": "6 cloves of"
+				},
+				{
+					"name": "onion",
+					"quantity": "1 large"
+				},
+				{
+					"name": "fennel",
+					"quantity": "1 bulb of"
+				},
+				{
+					"name": "leek",
+					"quantity": "1"
+				},
+				{
+					"name": "asparagus spears",
+					"quantity": "1 handful of"
+				},
+				{
+					"name": "fresh peas",
+					"quantity": "1 handful of"
+				},
+				{
+					"name": "broad beans",
+					"quantity": "1 handful of"
+				},
+				{
+					"name": "fresh flat-leaf parsley",
+					"quantity": "Half a bunch of"
+				},
+				{
+					"name": "fresh dill",
+					"quantity": "Half a bunch of"
+				},
+				{
+					"name": "fresh tarragon",
+					"quantity": "a few sprigs of"
+				},
+				{
+					"name": "organic (*) stock",
+					"quantity": "600 ml"
+				},
+				{
+					"name": "green olives",
+					"quantity": "1 large handful of"
+				},
+				{
+					"name": "tinned cannellini beans",
+					"quantity": "1 handful of"
+				},
+				{
+					"name": "lemons",
+					"quantity": "2"
+				},
+				{
+					"name": "free-range eggs",
+					"quantity": "2 large"
+				},
+				{
+					"name": "natural yoghurt",
+					"quantity": "2 tablespoons"
+				},
+				{
+					"name": "extra virgin olive oil",
+					"quantity": ""
+				}
+			],
+			"method": [
+				"Joint the (*) into legs, thighs, breasts and arms.",
+				"Put a large casserole pan over a medium heat and add 3 tablespoons of olive oil. Season the (*) portions and place in the pan. Cook for 10 minutes, until browned on all sides, turning regularly, then remove to a plate.",
+				"Meanwhile, prep your veg. Peel and finely chop the garlic and onion. Trim and finely chop the fennel, trim and finely slice the leek and snap the woody ends off the asparagus. Pod the peas and broad beans, then pick the herb leaves and finely chop the stalks.",
+				"There should be a few tablespoons of fat left in the pan; if you have more, get rid of most of it. Add the garlic, onion, leek, fennel and herb stalks and cook until softened, stirring occasionally.",
+				"Place the (*) back in the pan, pour in the stock and season with black pepper. Cover with a lid, then cook over medium-low for around 45 minutes, or until the flesh is tender and falling off the bone.",
+				"Bring the mixture back up to a boil, destone and stir in the olives, peas, broad beans and cannellini beans. When the vegetables are done, add most of the herb leaves, reserving some for garnish.",
+				"Remove the (*) from the stew and use 2 forks to pull the flesh off the bones. Discard the bones, return the meat to the pan, then season to perfection and remove from the heat.",
+				"At this point, the stew will be delicious, but it’s the next step that makes it amazing. Beat the juice of 2 lemons and the eggs together well, then pour slowly into the stew – don’t let it boil or the egg mixture with scramble – it should just add a gorgeous shine.",
+				"Stir in the yoghurt before ladling the stew into bowls. Drizzle a little extra virgin olive oil over each bowl, grate over a little Parmesan and serve sprinkled with the reserved herbs."
+			]
+		},
+		{
+			"title": "One-pan fabulous (*)",
+			"intro": "",
+			"images": "https://img.jamieoliver.com/jamieoliver/recipe-database/xtra_med/55846373.jpg?tr=w-400",
+			"serves": 4,
+			"cooksIn": 15,
+			"ingredients": [
+				{
+					"name": "white basmati rice",
+					"quantity": "300g"
+				},
+				{
+					"name": "green olive tapenade",
+					"quantity": "6 heaped teaspoons"
+				},
+				{
+					"name": "ripe mixed-colour cherry tomatoes",
+					"quantity": "350g"
+				},
+				{
+					"name": "fresh basil",
+					"quantity": "Half a bunch of"
+				},
+				{
+					"name": "(*) fillets",
+					"quantity": "500g"
+				},
+			],
+			"method": [
+				"In a large shallow casserole pan on a high heat, mix the rice with 2 heaped teaspoons of tapenade, then pour over 600ml of water. Put the lid on and let it come to the boil while you halve the tomatoes and, in a bowl, mix them with 1 tablespoon each of olive oil and red wine vinegar. Taste, season to perfection with sea salt and black pepper, and tear in most of the basil leaves. <br> Cut the fish into four equal-sized pieces and place in the pan, pushing them into the rice. Scatter over the dressed tomatoes. Put the lid back on and boil for 10 minutes, or until the rice is cooked through, then remove the lid and cook for a further 2 minutes until all the liquid has evaporated. Spoon the remaining tapenade over the fish, pick over the remaining basil leaves, drizzle lightly with extra virgin olive oil, and dish up."
+			] 
+		},
+		{
+			"title": "Leek & (*) parcels",
+			"intro": "These are simple and elegant – and easy on the washing-up. You could always prep these parcels the evening before, then simply pop them in the oven as soon as you get in the door.",
+			"images": "https://img.jamieoliver.com/jamieoliver/recipe-database/xtra_med/58393575.jpg?tr=w-400",
+			"serves": 4,
+			"cooksIn": 40,
+			"ingredients": [
+				{
+					"name": "unsalted butter",
+					"quantity": "50g"
+				},
+				{
+					"name": "leeks",
+					"quantity": "2 medium"
+				},
+				{
+					"name": "(*) fillets, skin off, boned",
+					"quantity": "4"
+				},
+				{
+					"name": "dry vermouth , or dry white wine",
+					"quantity": "8 tablespoons"
+				},
+				{
+					"name": "organic chicken stock",
+					"quantity": "4 tablespoons"
+				},
+				{
+					"name": "baby capers",
+					"quantity": "1 tablespoon"
+				},
+				{
+					"name": "fresh dill",
+					"quantity": "A few sprigs of"
+				}
+			],
+			"method": [
+				"Preheat the oven to 200ºC/400ºF/gas 6.",
+				"Melt the butter in a non-stick frying pan over a medium heat. Cut out four 40cm squares of greaseproof paper and brush with a little melted butter. Trim the leeks, then julienne or cut into matchsticks and sauté in the butter for 6 to 8 minutes, or until lightly golden. Season well.",
+				"Divide half of the leeks between the paper. Place a (*) fillet on each, season, and spoon over 2 tablespoons of vermouth, 1 tablespoon of stock and the remaining leeks. Scatter over the capers. Finely chop and scatter over the dill. Fold up the sides of the paper and scrunch up to make secure parcels.",
+				"Place the parcels on a baking sheet and cook for 15 minutes, or until the (*) is cooked. Open the parcels at the table."
+			] 
+		},
+		{
+			"title": "",
+			"intro": "",
+			"images": "",
+			"serves": 0,
+			"cooksIn": 0,
+			"ingredients": [
+				{
+					"name": "",
+					"quantity": ""
+				}
+			],
+			"method": [
+				
+			] 
+		}
+	]
+}

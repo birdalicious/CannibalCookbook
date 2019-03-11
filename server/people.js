@@ -65,14 +65,13 @@ const search = function(query, callback) {
 			"data": []
 		};
 
-		console.log(images)
-
 		for(let i = 0, l = pageids.length; i < l; i += 1) {
 			let result = {}
 
 			result.title = results[pageids[i]].title;
 			result.id = pageids[i];
 
+			// Try to get image info
 			let image
 			try {
 				image = images[pageids[i]].thumbnail.source
@@ -84,8 +83,6 @@ const search = function(query, callback) {
 			if(image) {
 				result.image = image;
 			}
-
-			// console.log(result)
 
 			data.data.push(result);
 		}
@@ -102,6 +99,47 @@ const search = function(query, callback) {
 	});
 }
 
+const getPageInfo = function(id, callback) {
+	let relatedPeople = 5;
+
+	let pageTitleURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&rvprop=content&titles="
+	let pageidURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&rvprop=content&pageids=";
+
+	fetch(pageidURL + id)
+	.then(response => response.text())
+	.then(body => {
+		// Get the page infomation
+		let pages = JSON.parse(body).query.pages;
+		pages = Object.values(pages);
+
+		if(pages.length != 1) {
+			callback({
+				status: 400,
+				data: "Invalid ID"
+			});
+			return;
+		}
+
+		let content = pages[0].revisions[0]["*"];
+
+		if(content.indexOf("birth_date") == -1) {
+			callback({
+				status: 400,
+				data: "Not a person"
+			});
+			return;
+		}
+
+		let data = {
+			title: pages[0].title,
+			id: id
+		};
+		
+		callback("stuff");
+	})
+}
+
 module.exports = {
-	search: search
+	search: search,
+	getPageInfo: getPageInfo
 };
