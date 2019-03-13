@@ -100,10 +100,15 @@ const search = function(query, callback) {
 }
 
 const getPageInfo = function(id, callback) {
-	let relatedPeople = 5;
+	let pageTitlesURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&rvsection=0&rvprop=content&titles="
+	let pageidURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&rvprop=content&rvsection=0&pageids=";
 
-	let pageTitleURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&rvprop=content&titles="
-	let pageidURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&rvprop=content&pageids=";
+	let data = {
+		id: id,
+		title: "",
+		description: "",
+		related: []
+	};
 
 	fetch(pageidURL + id)
 	.then(response => response.text())
@@ -129,13 +134,81 @@ const getPageInfo = function(id, callback) {
 			});
 			return;
 		}
-
-		let data = {
-			title: pages[0].title,
-			id: id
-		};
 		
-		callback("stuff");
+		data.title = pages[0].title;
+
+
+		// Get short description
+		const descriptionStringTag = "short description|";
+		let descriptionIndex = content.indexOf(descriptionStringTag);
+		if(descriptionIndex == -1) {
+			callback({
+				status: 500,
+				data: "Invaild Page"
+			});
+			return;
+		}
+		descriptionIndex += descriptionStringTag.length;
+
+		let description = "";
+		let i = descriptionIndex
+		while(content[i] != "}") {
+			description += content[i]
+			i += 1;
+		}
+
+		data.description = description;
+
+		// Related people
+		let titles = ""
+		let lastCharacter = ""
+		let linkCount = 0;
+		let readingName = false;
+		for(let i = 0, l = content.length; i < l; i += 1) {
+			if(content[i] == "[" && lastCharacter == "[") {
+				readingName = true;
+			} else if(readingName) {
+				if(content[i] == "]") {
+					readingName = false;
+					titles += "|"
+					linkCount += 1
+				} else {
+					titles += content[i];
+				}
+			}
+
+			// Stop the query from getting too big
+			if(linkCount > 20) {
+				break;
+			}
+
+			lastCharacter = content[i];
+		}
+		titles = titles.slice(0, -1);
+		
+		return fetch(pageTitlesURL + titles);
+	})
+	.then(response => response.text())
+	.then(body => {
+		let pages = JSON.parse(body).query.pages;
+		pages = Object.values(pages);
+
+		for(let i = 0, l = pages.length; i < l; i += 1) {
+			if(pages[i].revisions) {
+				let content = pages[i].revisions[0]["*"];
+
+				if(content.indexOf("birth_date") != -1) {
+					data.related.push({
+						title: pages[i].title,
+						id: pages[i].pageid
+					})
+				}
+			}
+		}
+
+		console.log(data)
+
+		callback(data);
 	})
 }
 
