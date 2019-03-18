@@ -1,9 +1,10 @@
 * {
 	margin: 0;
+	font-family: 'Roboto', sans-serif;
 }
 
 body {
-	/*background-color: #ECEFF1;*/
+	background-color: #ECEFF1;
 }
 
 header {
@@ -19,5 +20,105 @@ header {
 	font-size: 20px;
 
 	padding: 7px 10px;
-	width: 584px;
+
+	min-width: 584px;
+	max-width: 100%;
 }
+
+#searchContainer {
+	margin: 0 auto;
+
+	width: 608px;
+}
+
+.resultCard {
+	margin-top: 25px;
+
+	display: grid;
+	grid-template-areas:
+	'img title title title'
+	'img description description description'
+	'img cooks serves blank';
+
+	background-color: #FFF;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	
+	padding: 3% 5%;
+
+}
+
+.resultCard:hover {
+	cursor: pointer;
+}
+
+.resultImg {
+	grid-area: img;
+
+	width: 125px;
+	height: 125px;
+
+	background: transparent no-repeat center;
+	background-size: cover;
+	margin-right: 15px;
+}
+
+.resultTitle {
+	grid-area: title;
+	font-weight: bold;
+	font-size: 1.5em;
+}
+
+.resultDescription {
+	grid-area: description;
+}
+
+.resultCooksIn {
+	grid-area: cooks;
+	margin-right: 25px;
+	font-size: 0.85em;
+
+	color: #808080;
+
+	vertical-align: text-bottom;
+}
+
+.resultServes {
+	grid-area: serves;
+	font-size: 0.85em;
+
+	color: #808080;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*.result > .resultImg {
+	width: 125px;
+	height: 125px;
+
+	background: transparent no-repeat center;
+  	background-size: cover;
+	margin-right: 35px;
+  	float: left;
+}
+
+.result > .resultTitle {
+
+}
+
+.resultsCooksIn {
+	display: inline-block;
+}
+
+.resultsServes {
+	display: inline-block;
+	background-color: : #AAA;
+}*/
