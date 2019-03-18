@@ -1,5 +1,5 @@
 {
-	"generators": [
+	"generator": [
 		{
 			"title": "(*) panzanella",
 			"intro": "This recipe is all about sharing flavours. The bread soaks up the herby roasting juices of the (*) to give you the crunchiest, most delicious croutons ever.",
@@ -242,7 +242,7 @@
 				{
 					"name": "(*) fillets",
 					"quantity": "500g"
-				},
+				}
 			],
 			"method": [
 				"In a large shallow casserole pan on a high heat, mix the rice with 2 heaped teaspoons of tapenade, then pour over 600ml of water. Put the lid on and let it come to the boil while you halve the tomatoes and, in a bowl, mix them with 1 tablespoon each of olive oil and red wine vinegar. Taste, season to perfection with sea salt and black pepper, and tear in most of the basil leaves. <br> Cut the fish into four equal-sized pieces and place in the pan, pushing them into the rice. Scatter over the dressed tomatoes. Put the lid back on and boil for 10 minutes, or until the rice is cooked through, then remove the lid and cook for a further 2 minutes until all the liquid has evaporated. Spoon the remaining tapenade over the fish, pick over the remaining basil leaves, drizzle lightly with extra virgin olive oil, and dish up."

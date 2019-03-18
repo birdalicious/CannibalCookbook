@@ -43,8 +43,13 @@ const search = function(query, callback) {
 				result.id = page.pageid;
 
 				pageids.push(page.pageid)
+
+				result.description = "Test"
+
+				result.description = getShortDescription(content);
 				
 				results[page.pageid] = result;
+
 			}
 		}
 
@@ -70,6 +75,7 @@ const search = function(query, callback) {
 
 			result.title = results[pageids[i]].title;
 			result.id = pageids[i];
+			result.description = results[pageids[i]].description;
 
 			// Try to get image info
 			let image
@@ -92,7 +98,7 @@ const search = function(query, callback) {
 	.catch(err => {
 		let data = {
 			"status": 500,
-			"data": []
+			"data": err
 		}
 
 		callback(data);
@@ -137,27 +143,7 @@ const getPageInfo = function(id, callback) {
 		
 		data.title = pages[0].title;
 
-
-		// Get short description
-		const descriptionStringTag = "short description|";
-		let descriptionIndex = content.indexOf(descriptionStringTag);
-		if(descriptionIndex == -1) {
-			callback({
-				status: 500,
-				data: "Invaild Page"
-			});
-			return;
-		}
-		descriptionIndex += descriptionStringTag.length;
-
-		let description = "";
-		let i = descriptionIndex
-		while(content[i] != "}") {
-			description += content[i]
-			i += 1;
-		}
-
-		data.description = description;
+		data.description = getShortDescription(content);
 
 		// Related people
 		let titles = ""
@@ -205,11 +191,37 @@ const getPageInfo = function(id, callback) {
 				}
 			}
 		}
-
-		console.log(data)
-
-		callback(data);
+		
+		callback({
+			status: 200,
+			data: data
+		});
 	})
+	.catch(err => {
+		let data = {
+			status: 500,
+			data: []
+		}
+		callback(data)
+	})
+}
+
+const getShortDescription = function(content) {
+	const descriptionStringTag = "short description|";
+	let descriptionIndex = content.indexOf(descriptionStringTag);
+	if(descriptionIndex == -1) {
+		return -1;
+	}
+	descriptionIndex += descriptionStringTag.length;
+
+	let description = "";
+	let i = descriptionIndex
+	while(content[i] != "}") {
+		description += content[i]
+		i += 1;
+	}
+
+	return description;
 }
 
 module.exports = {
