@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 
 const search = function(query, callback) {
-	let searchURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=";0
+	let searchURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=";
 	let pagesURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&rvprop=content&rvsection=0&pageids=";
 	let imagesURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&piprop=name|thumbnail&pithumbsize=300&pageids=";
 	searchURL += query;
@@ -43,8 +43,6 @@ const search = function(query, callback) {
 				result.id = page.pageid;
 
 				pageids.push(page.pageid)
-
-				result.description = "Test"
 
 				result.description = getShortDescription(content);
 				
@@ -108,6 +106,7 @@ const search = function(query, callback) {
 const getPageInfo = function(id, callback) {
 	let pageTitlesURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&rvsection=0&rvprop=content&titles="
 	let pageidURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&rvprop=content&rvsection=0&pageids=";
+	let imagesURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&piprop=name|thumbnail&pithumbsize=300&pageids=";
 
 	let data = {
 		id: id,
@@ -192,10 +191,31 @@ const getPageInfo = function(id, callback) {
 			}
 		}
 		
+
+		imagesURL += id;
+		return fetch(imagesURL)
+	})
+	.then(response => response.text())
+	.then(body => {
+		let images = JSON.parse(body).query.pages;
+
+		// Try to get image info
+		let image
+		try {
+			image = images[id].thumbnail.source
+		} catch(err) {
+			image = false
+		}
+		data.image = "";
+		if(image) {
+			data.image = image;
+		}
+
 		callback({
 			status: 200,
 			data: data
-		});
+		})
+
 	})
 	.catch(err => {
 		let data = {

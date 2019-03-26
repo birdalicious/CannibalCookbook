@@ -75,6 +75,7 @@ const getRecipe = function(id, callback) {
 	let randomIndex = Math.floor(random*recipesCount);
 
 	let recipe = recipes.generator[randomIndex];
+	console.log(recipe)
 
 	let result = {};
 

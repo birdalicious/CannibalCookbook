@@ -9,30 +9,37 @@ const app = express();
 
 app.use("/", express.static("client"));
 
-app.get("/api/recipes/search", function(req, resp){
-	search = req.query.q;
+app.get("/api/recipes/search/:query/", function(req, resp){
+	search = req.params.query;
 
-	people.search(search, (data) => {
+	recipes.search(search, (data) => {
+		resp.send(data)
+	});
+});
+
+app.get("/api/recipes/recipe/:query/", function(req, resp){
+	id = req.params.query;
+
+	recipes.getRecipe(id, (data) => {
 		resp.send(data)
 	});
 });
 
 app.get("/api/people/search", function(req, resp){
-	search = req.query.q;
+	search = req.params.query;
 
 	people.search(search, (data) => {
 		resp.send(data)
 	});
 });
 
-app.get("/api/people/pageInfo", function(req, resp){
-	search = req.query.q;
+app.get("/api/people/pageInfo/:query/", function(req, resp){
+	search = req.params.query;
 
 	people.getPageInfo(search, (data) => {
 		resp.send(data)
 	});
 });
-
 
 
 
