@@ -71,6 +71,7 @@ function clickSearchResult() {
 	let id = this.getAttribute("id")
 
 	searchContainer.innerHTML = "<img src=\"./assets/loading.gif\" id=\"loadingImage\">"
+	recipeContainer.innerHTML = "";
 
 	fetch("/api/recipes/recipe/" + id)
 	.then(response => response.text())
@@ -83,8 +84,6 @@ function clickSearchResult() {
 		}
 
 		let content = body.data;
-
-		recipeContainer.innerHTML = "";
 
 		fillInRecipe(content)
 
@@ -158,7 +157,7 @@ function fillInRecipe(content) {
 	HTML += "<div id=\"recipeRight\">"
 
 	for(let i = 0, related = content.related, length = related.length > 4? 4: related.length; i < length; i += 1) {
-		HTML += "<div class=\"recommended\">"
+		HTML += "<div class=\"recommended\" id=\"" + related[i].id + "\">"
 
 		HTML += "<div class=\"recommendedImg\" style=\"background-image: url('" + related[i].image + "')\"></div>"
 
