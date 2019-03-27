@@ -1,4 +1,6 @@
 var searchBox = document.getElementById("searchBox");
+let searchContainer = document.getElementById("searchContainer");
+let recipeContainer = document.getElementById("recipeContainer");
 var searchResults;
 
 searchBox.addEventListener("keyup", function(event) {
@@ -9,6 +11,7 @@ searchBox.addEventListener("keyup", function(event) {
 		
 		let query = this.value;
 		
+		recipeContainer.innerHTML = ""
 		searchContainer.innerHTML = "<img src=\"./assets/loading.gif\" id=\"loadingImage\">"
 
 		fetch("/api/recipes/search/" + query)
@@ -16,7 +19,6 @@ searchBox.addEventListener("keyup", function(event) {
 		.then(body => {
 			body = JSON.parse(body)
 
-			let searchContainer = document.getElementById("searchContainer");
 			searchContainer.innerHTML = ""
 
 			let people = body.data;
@@ -66,5 +68,109 @@ searchBox.addEventListener("keyup", function(event) {
 });
 
 function clickSearchResult() {
-	console.log(this.getAttribute("id"))
+	let id = this.getAttribute("id")
+
+	searchContainer.innerHTML = "<img src=\"./assets/loading.gif\" id=\"loadingImage\">"
+
+	fetch("/api/recipes/recipe/" + id)
+	.then(response => response.text())
+	.then(body => {
+		body = JSON.parse(body)
+		if(body.status != 200) {
+			searchContainer.innerHTML = "<div id=\"noResults\"> Something went wrong :( </div>";
+			recipeContainer.innerHTML = "";
+			return
+		}
+
+		let content = body.data;
+
+		recipeContainer.innerHTML = "";
+
+		fillInRecipe(content)
+
+		let recommended = document.getElementsByClassName("recommended");
+		for(let i = 0; i < recommended.length; i += 1) {
+			recommended[i].addEventListener("click", clickSearchResult)
+		}	
+
+	})
+}
+
+function fillInRecipe(content) {
+	let HTML = ""
+
+	//Left
+
+	//Person Image
+	HTML += "<div id=\"recipeLeft\">"
+	if(content.personImage != -1) {
+		HTML += "<img id=\"recipePersonImage\" src=\"" + content.personImage + "\"></img>"
+	}
+
+	//Ingredients
+	HTML += "<div id=\"recipeIngredients\">"
+	HTML += "<h2>Ingredients</h2><br>"
+	HTML += "<ul>"
+
+	console.log(content)
+
+	for(let i = 0, ingredients = content.ingredients, length = ingredients.length; i < length; i += 1) {
+		HTML += "<li>" + ingredients[i].quantity + " " + ingredients[i].name + "</li>"
+	}
+
+	HTML += "</ul>"
+	HTML += "</div>"
+	HTML += "</div>"
+
+	//Main
+
+	HTML += "<div id=\"recipeMain\">"
+	HTML += "<img id=\"recipeFoodImage\" src=\"" + content.foodImage + "\">"
+
+	HTML += "<div id=\"recipeInfo\">"
+
+	HTML += "<h1 id=\"recipeTitle\">" + content.title + "<hr></h1>"
+
+	if(content.intro != "") {
+		HTML += "<div id=\"recipeIntro\">" + content.intro + "<hr></div>"
+	}	
+
+	HTML += "<div id=\"recipeCookingInfo\">Cooks In: " + content.cooksIn + "<br>Serves: " + content.serves + "</div>"
+
+	HTML += "</div>"
+
+	HTML += "<div id=\"recipeMethod\">"
+	HTML += "<h2>Method</h2><br>"
+	HTML += "<ol>"
+
+	for(let i = 0, steps = content.method, length = steps.length; i < length - 1; i += 1) {
+		HTML += "<li>" + steps[i] + "</li><br>"
+	}
+	HTML += "<li>" + content.method[content.method.length - 1] + "</li><br>"
+
+
+	HTML += "</ol>"
+	HTML += "</div>"
+
+	HTML += "</div>"
+
+	//Right
+	HTML += "<div id=\"recipeRight\">"
+
+	for(let i = 0, related = content.related, length = related.length > 4? 4: related.length; i < length; i += 1) {
+		HTML += "<div class=\"recommended\">"
+
+		HTML += "<div class=\"recommendedImg\" style=\"background-image: url('" + related[i].image + "')\"></div>"
+
+		HTML += "<div class=\"recommendedTitle\"><h3>" + related[i].title + "</h3></div>"
+
+		HTML += "</div>"
+	}
+
+	HTML += "</div>"
+
+
+
+	searchContainer.innerHTML = ""
+	recipeContainer.innerHTML = HTML
 }

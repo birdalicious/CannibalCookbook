@@ -7,7 +7,7 @@ const search = function(query, callback) {
 		if(data.status != 200) {
 			callback({
 				status: data.status,
-				data: []
+				data: data.data
 			});
 			return;
 		}
@@ -75,7 +75,6 @@ const getRecipe = function(id, callback) {
 	let randomIndex = Math.floor(random*recipesCount);
 
 	let recipe = recipes.generator[randomIndex];
-	console.log(recipe)
 
 	let result = {};
 
@@ -83,7 +82,7 @@ const getRecipe = function(id, callback) {
 		if(data.status != 200) {
 			callback({
 				status: data.status,
-				data: []
+				data: data.data
 			})
 			return
 		}
@@ -120,10 +119,42 @@ const getRecipe = function(id, callback) {
 
 		result.method = method;
 
-		callback({
-			status: 200,
-			data: result
-		})
+		//Get related recipes
+		let related = data.data.related;
+		let ids = [];
+		for(let i = 0, length = related.length; i < length; i += 1) {
+			ids.push(related[i].id)
+		}
+
+		people.getImages(ids, (images) => {
+			for(let i = 0, length = images.data.length; i < length; i += 1) {
+				related[i].image = images.data[i].image
+			}
+
+			for(let i = 0, length = related.length; i < length; i += 1) {
+				let rng = seedrandom(related[i].id)
+				let random = rng()
+				let randomIndex = Math.floor(random*recipes.generator.length);
+
+				let recipe = recipes.generator[randomIndex];
+
+				related[i].image = images.data[i].image
+				if(related[i].image == -1) {
+					related[i].image = recipe.image
+				}
+
+				related[i].title = recipe.title.replace("(*)", related[i].title)
+
+			}
+
+			result.related = related;
+
+			callback({
+				status: 200,
+				data: result
+			})
+		});
+
 	})
 }
 

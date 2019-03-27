@@ -112,6 +112,11 @@ header {
 	'left main right';
 	
 	text-align: left;
+	
+	width: 1258px;
+	
+	margin-left: auto;
+	margin-right: auto;
 
 	margin-top: 25px;
 	background-color: #FFF;
@@ -148,6 +153,8 @@ header {
 #recipeRight {
 	grid-area: right;
 	width: 300px;
+	margin-right: 25px;
+	margin-left: 15px;
 	/*margin: 25px 0 25px 0;*/
 }
 
@@ -175,7 +182,7 @@ header {
 
 #recipeCookingInfo {
 	grid-area: info;
-	align-self: end;
+	/*align-self: end;*/
 	/*text-transform: uppercase;*/
 }
 
@@ -194,17 +201,32 @@ header {
 #recipeIngredients > ul {
 	list-style: none;
 	padding-left: 0;
-	margin-right: 15px;
+	margin-right: 25px;
 }
 #recipeIngredients > ul > li {
 	margin-top: 15px;
 }
 
+.recommended {
+	margin-top: 25px;
+	width: 300px;
+}
 
+.recommended:hover {
+	cursor: pointer
+}
 
+.recommendedImg {
+	width: 100px;
+	height: 100px;
+	background: transparent no-repeat center;
+	background-size: cover;
+	margin: 0 auto;
+}
 
-
-
+.recommendedTitle {
+	text-align: center;
+}
 
 
 /*.result > .resultImg {

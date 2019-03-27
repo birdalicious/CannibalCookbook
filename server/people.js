@@ -220,7 +220,51 @@ const getPageInfo = function(id, callback) {
 	.catch(err => {
 		let data = {
 			status: 500,
+			data: err
+		}
+		console.log(err)
+		callback(data)
+	})
+}
+
+const getImages = function(ids, callback) {
+	let imagesURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&piprop=name|thumbnail&pithumbsize=300&pageids=";
+
+	for(let i = 0, length = ids.length; i < length - 1; i += 1) {
+		imagesURL += ids[i] + "|";
+	}
+	imagesURL += ids[ids.length - 1];
+
+	fetch(imagesURL)
+	.then(response => response.text())
+	.then(body => {
+		let images = JSON.parse(body).query.pages;
+
+		let data = {
+			status: 200,
 			data: []
+		}
+
+		for(let i = 0, length = ids.length; i < length; i += 1) {
+			let image
+			try {
+				image = images[ids[i]].thumbnail.source
+			} catch(err) {
+				image = -1
+			}
+
+			data.data.push({
+				id: ids[i],
+				image: image
+			})
+		}
+
+		callback(data);
+	})
+	.catch(err => {
+		let data = {
+			status: 500,
+			data: err
 		}
 		callback(data)
 	})
@@ -246,5 +290,6 @@ const getShortDescription = function(content) {
 
 module.exports = {
 	search: search,
-	getPageInfo: getPageInfo
+	getPageInfo: getPageInfo,
+	getImages: getImages
 };

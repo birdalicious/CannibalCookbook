@@ -25,7 +25,7 @@ app.get("/api/recipes/recipe/:query/", function(req, resp){
 	});
 });
 
-app.get("/api/people/search", function(req, resp){
+app.get("/api/people/search/:query/", function(req, resp){
 	search = req.params.query;
 
 	people.search(search, (data) => {
@@ -37,6 +37,14 @@ app.get("/api/people/pageInfo/:query/", function(req, resp){
 	search = req.params.query;
 
 	people.getPageInfo(search, (data) => {
+		resp.send(data)
+	});
+});
+
+app.get("/api/people/image/:query/", function(req, resp){
+	search = req.params.query;
+
+	people.getImages([search], (data) => {
 		resp.send(data)
 	});
 });
