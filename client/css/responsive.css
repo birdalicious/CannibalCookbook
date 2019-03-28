@@ -1,0 +1,78 @@
+@media only screen and (max-width: 1258px) {
+
+h1, h2, h3 {
+	font-family: 'Open Sans', sans-serif;
+}
+
+#recipeContainer {
+	grid-template-areas:
+	'main'
+	'left'
+	'right';
+
+	width: 608px;
+}
+
+#recipeMain {
+	padding: 0 25px;
+	width: 558px;
+}
+
+#recipeLeft {
+	margin: 0 25px;
+	width: 558px;
+	grid-template-areas:
+	'image ingredients';
+	justify-self: center;
+}
+
+#recipeLeft > img {
+	margin-right: 25px;
+}
+
+#recipeRight {
+	margin: 0 25px;
+	width: 558px;
+}
+
+
+#recipeRight > h2 {
+	text-align: left;
+}
+
+.resultTitle {
+	font-family: 'Open Sans', sans-serif;
+}
+
+.recommended {
+	width: 279px;
+	float: left;
+}
+
+}
+
+@media only screen and (max-width: 608px) {
+
+#searchBox {
+	width: 100%;
+	/*padding: 0;*/
+}
+
+#searchContainer {
+	width: 100%;
+	margin: 0;
+}
+
+#recipeContainer, #recipeMain, #recipeLeft, #recipeRight {
+	width: 100%;
+}
+
+#recipeMain {
+	grid-template-columns: 100px auto;
+}
+
+#recipeFoodImage {
+	width: 100px;
+}
+
+}

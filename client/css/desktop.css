@@ -38,8 +38,7 @@ header {
 
 	padding: 7px 10px;
 
-	min-width: 584px;
-	max-width: 100%;
+	width: 584px;
 }
 
 #searchContainer {
@@ -127,6 +126,11 @@ header {
 	grid-area: left;
 	justify-self: end;
 
+	display: grid;
+	grid-template-areas:
+	'image'
+	'ingredients';
+
 	width: 300px;
 	margin: 25px 0 0 25px;
 }
@@ -155,6 +159,7 @@ header {
 	width: 300px;
 	margin-right: 25px;
 	margin-left: 15px;
+	margin-bottom: 25px
 	/*margin: 25px 0 25px 0;*/
 }
 
@@ -198,6 +203,14 @@ header {
 	transform: translate(-50%);
 }
 
+#recipePersonImage {
+	grid-area: image;
+}
+
+#recipeIngredients {
+	grid-area: ingredients;
+}
+
 #recipeIngredients > ul {
 	list-style: none;
 	padding-left: 0;
@@ -207,13 +220,18 @@ header {
 	margin-top: 15px;
 }
 
+#recipeRight > h2 {
+	margin-top: 25px;
+	text-align: center;
+}
+
 .recommended {
 	margin-top: 25px;
 	width: 300px;
 }
 
 .recommended:hover {
-	cursor: pointer
+	cursor: pointer;
 }
 
 .recommendedImg {

@@ -3,6 +3,9 @@ let searchContainer = document.getElementById("searchContainer");
 let recipeContainer = document.getElementById("recipeContainer");
 var searchResults;
 
+window.addEventListener("resize", setSearchBoxSize);
+window.onload = setSearchBoxSize;
+
 searchBox.addEventListener("keyup", function(event) {
 	// Number 13 is the "Enter" key on the keyboard
 	if (event.keyCode === 13) {
@@ -111,8 +114,6 @@ function fillInRecipe(content) {
 	HTML += "<h2>Ingredients</h2><br>"
 	HTML += "<ul>"
 
-	console.log(content)
-
 	for(let i = 0, ingredients = content.ingredients, length = ingredients.length; i < length; i += 1) {
 		HTML += "<li>" + ingredients[i].quantity + " " + ingredients[i].name + "</li>"
 	}
@@ -140,21 +141,27 @@ function fillInRecipe(content) {
 
 	HTML += "<div id=\"recipeMethod\">"
 	HTML += "<h2>Method</h2><br>"
-	HTML += "<ol>"
+	
 
-	for(let i = 0, steps = content.method, length = steps.length; i < length - 1; i += 1) {
-		HTML += "<li>" + steps[i] + "</li><br>"
+	if(content.method.length == 1) {
+		HTML += "<p>" + content.method[0] + "</p>"
+	} else {
+		HTML += "<ol>"
+		for(let i = 0, steps = content.method, length = steps.length; i < length - 1; i += 1) {
+			HTML += "<li>" + steps[i] + "</li><br>"
+		}
+		HTML += "<li>" + content.method[content.method.length - 1] + "</li>"
+		HTML += "</ol>"
 	}
-	HTML += "<li>" + content.method[content.method.length - 1] + "</li><br>"
 
-
-	HTML += "</ol>"
 	HTML += "</div>"
 
 	HTML += "</div>"
 
 	//Right
 	HTML += "<div id=\"recipeRight\">"
+
+	HTML += "<h2>Recommened</h2>";
 
 	for(let i = 0, related = content.related, length = related.length > 4? 4: related.length; i < length; i += 1) {
 		HTML += "<div class=\"recommended\" id=\"" + related[i].id + "\">"
@@ -172,4 +179,17 @@ function fillInRecipe(content) {
 
 	searchContainer.innerHTML = ""
 	recipeContainer.innerHTML = HTML
+}
+
+function setSearchBoxSize() {
+	let width = window.innerWidth;
+
+	if(width < 608) {
+		searchBox.style.padding = "";
+		searchBox.style.width = (width - 20 - 4) + "px";
+
+		// document.getElementById("recipeMain").style.width = width
+	} else {
+		searchBox.style.width = "584px"
+	}
 }
