@@ -1,280 +1,60 @@
-const fetch = require("node-fetch");
+const wiki = require("./wikiFetch.js")
 
-const search = function(query, callback) {
-	let searchURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=";
-	let pagesURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&rvprop=content&rvsection=0&pageids=";
-	let imagesURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&piprop=name|thumbnail&pithumbsize=300&pageids=";
-	searchURL += query;
-
-	let pageids = [];
-
-	let results = {};
-
-	fetch(searchURL)
-	.then(response => response.text())
-	.then(body => {
-		// Get all the search results as an array
-		let results = JSON.parse(body).query.search;
-
-		// Build the query to get page information
-		for(let i = 0, l = results.length; i < l - 1; i += 1) {
-			pagesURL += results[i].pageid + "|"
-		}
-		pagesURL += results[results.length - 1].pageid
-
-		return fetch(pagesURL)
-	})
-	.then(response => response.text())
-	.then(body => {
-		// Get the page infomation
-		let pages = JSON.parse(body).query.pages;
-		pages = Object.values(pages);
-
-		for(let i = 0, length = pages.length; i < length; i += 1) {
-			let page = pages[i];
-			// The wikitext
-			let content = page.revisions[0]["*"];
-
-			// Check if they are a person
-			if(content.indexOf("birth_date") != -1) {
-				let result = {};
-
-				result.title = page.title;
-				result.id = page.pageid;
-
-				pageids.push(page.pageid)
-
-				result.description = getShortDescription(content);
-				
-				results[page.pageid] = result;
-
-			}
+function getPageIdsFromSearch(query) {
+	return new Promise((resolve, reject) => {
+		if(typeof query != "string") {
+			reject("Invalid Query");
 		}
 
-		// Build query to get image information
-		for(let i = 0, l = pageids.length; i < l - 1; i += 1) {
-			imagesURL += pageids[i] + "|"
-		}
-		imagesURL += pageids[pageids.length - 1];
+		//Get the page results
+		wiki.searchFetch(query)
+		.then(response => response.json())
+		.then(body => {
+			let response = body.query.search;
 
-		return fetch(imagesURL);
-	})
-	.then(response => response.text())
-	.then(body => {
-		let images = JSON.parse(body).query.pages;
-
-		let data = {
-			"status": 200,
-			"data": []
-		};
-
-		for(let i = 0, l = pageids.length; i < l; i += 1) {
-			let result = {}
-
-			result.title = results[pageids[i]].title;
-			result.id = pageids[i];
-			result.description = results[pageids[i]].description;
-
-			// Try to get image info
-			let image
-			try {
-				image = images[pageids[i]].thumbnail.source
-			} catch(err) {
-				image = false
+			let queries = [];
+			for(let i = 0, length = response.length; i < length; i += 1) {
+				queries.push(response[i].pageid)
 			}
 
-			result.image = "";
-			if(image) {
-				result.image = image;
-			}
-
-			data.data.push(result);
-		}
-
-		callback(data)
+			resolve(queries)
+		});
 	})
-	.catch(err => {
-		let data = {
-			"status": 500,
-			"data": err
-		}
-
-		callback(data);
-	});
 }
 
-const getPageInfo = function(id, callback) {
-	let pageTitlesURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&rvsection=0&rvprop=content&titles="
-	let pageidURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&rvprop=content&rvsection=0&pageids=";
-	let imagesURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&piprop=name|thumbnail&pithumbsize=300&pageids=";
-
-	let data = {
-		id: id,
-		title: "",
-		description: "",
-		related: []
-	};
-
-	fetch(pageidURL + id)
-	.then(response => response.text())
-	.then(body => {
-		// Get the page infomation
-		let pages = JSON.parse(body).query.pages;
-		pages = Object.values(pages);
-
-		if(pages.length != 1) {
-			callback({
-				status: 400,
-				data: "Invalid ID"
-			});
-			return;
-		}
-
-		let content = pages[0].revisions[0]["*"];
-
-		if(content.indexOf("birth_date") == -1) {
-			callback({
-				status: 400,
-				data: "Not a person"
-			});
-			return;
-		}
-		
-		data.title = pages[0].title;
-
-		data.description = getShortDescription(content);
-
-		// Related people
-		let titles = ""
-		let lastCharacter = ""
-		let linkCount = 0;
-		let readingName = false;
-		for(let i = 0, l = content.length; i < l; i += 1) {
-			if(content[i] == "[" && lastCharacter == "[") {
-				readingName = true;
-			} else if(readingName) {
-				if(content[i] == "]") {
-					readingName = false;
-					titles += "|"
-					linkCount += 1
-				} else {
-					titles += content[i];
-				}
-			}
-
-			// Stop the query from getting too big
-			if(linkCount > 20) {
-				break;
-			}
-
-			lastCharacter = content[i];
-		}
-		titles = titles.slice(0, -1);
-		
-		return fetch(pageTitlesURL + titles);
-	})
-	.then(response => response.text())
-	.then(body => {
-		let pages = JSON.parse(body).query.pages;
-		pages = Object.values(pages);
-
-		for(let i = 0, l = pages.length; i < l; i += 1) {
-			if(pages[i].revisions) {
-				let content = pages[i].revisions[0]["*"];
-
-				if(content.indexOf("birth_date") != -1) {
-					data.related.push({
-						title: pages[i].title,
-						id: pages[i].pageid
-					})
-				}
-			}
-		}
-		
-
-		imagesURL += id;
-		return fetch(imagesURL)
-	})
-	.then(response => response.text())
-	.then(body => {
-		let images = JSON.parse(body).query.pages;
-
-		// Try to get image info
-		let image
+//Get the ids of the query ids which are people
+function selectPeople(body) {
+	return new Promise((resolve, reject) => {
+		let ids = []
+		let pages;
 		try {
-			image = images[id].thumbnail.source
+			pages = body.query.pages;
+			pages = Object.values(pages);
 		} catch(err) {
-			image = false
-		}
-		data.image = "";
-		if(image) {
-			data.image = image;
+			reject(err);
 		}
 
-		callback({
-			status: 200,
-			data: data
-		})
-
-	})
-	.catch(err => {
-		let data = {
-			status: 500,
-			data: err
-		}
-		console.log(err)
-		callback(data)
-	})
-}
-
-const getImages = function(ids, callback) {
-	let imagesURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&piprop=name|thumbnail&pithumbsize=300&pageids=";
-
-	for(let i = 0, length = ids.length; i < length - 1; i += 1) {
-		imagesURL += ids[i] + "|";
-	}
-	imagesURL += ids[ids.length - 1];
-
-	fetch(imagesURL)
-	.then(response => response.text())
-	.then(body => {
-		let images = JSON.parse(body).query.pages;
-
-		let data = {
-			status: 200,
-			data: []
-		}
-
-		for(let i = 0, length = ids.length; i < length; i += 1) {
-			let image
-			try {
-				image = images[ids[i]].thumbnail.source
-			} catch(err) {
-				image = -1
+		for(let i = 0, length = pages.length; i < length; i+= 1) {
+			let page = pages[i];
+			if(!page.revisions) {
+				continue;
 			}
+			let content = page.revisions[0]["*"]
 
-			data.data.push({
-				id: ids[i],
-				image: image
-			})
+			if(content.indexOf("birth_date") != -1) {
+				ids.push(page.pageid);
+			}
 		}
 
-		callback(data);
-	})
-	.catch(err => {
-		let data = {
-			status: 500,
-			data: err
-		}
-		callback(data)
+		resolve(ids);
 	})
 }
 
-const getShortDescription = function(content) {
+function getShortDescription(content) {
 	const descriptionStringTag = "short description|";
 	let descriptionIndex = content.indexOf(descriptionStringTag);
 	if(descriptionIndex == -1) {
-		return -1;
+		return "";
 	}
 	descriptionIndex += descriptionStringTag.length;
 
@@ -288,8 +68,207 @@ const getShortDescription = function(content) {
 	return description;
 }
 
+function search(query, callback) {
+	let pages;
+	let peopleIds;
+	let results = [];
+
+	wiki.searchFetch(query)
+	.then(response => response.json())
+	.then(body => {
+		let response = body.query.search;
+
+		let queries = [];
+		for(let i = 0, length = response.length; i < length; i += 1) {
+			queries.push(response[i].pageid)
+		}
+
+		return wiki.pagesByIdFetch(queries)
+	})
+	.catch(err => callback({status: 500, data: err}))
+	.then(response => response.json())
+	.then(body => {
+		pages = body.query.pages;
+		return selectPeople(body);
+	})
+	.catch(err => callback({status: 500, data: err}))
+	.then(ids => {
+		peopleIds = ids;
+		return wiki.imagesByIdFetch(ids);
+	})
+	.then(response => response.json())
+	.then(body => {
+		// Collect all the data gathered together
+		for(let i = 0, length = peopleIds.length; i < length; i += 1) {
+			let result = {};
+			let personContent = pages[peopleIds[i]];
+			let imageContent = body.query.pages[peopleIds[i]];
+
+
+			result.id = peopleIds[i];
+			result.title = personContent.title;
+
+			result.description = getShortDescription(personContent.revisions[0]["*"]);
+
+			if(imageContent.thumbnail && imageContent.thumbnail.source) {
+				result.image = imageContent.thumbnail.source;
+			} else {
+				result.image = "";
+			}
+
+			results.push(result	)
+		}
+
+		callback({
+			status: 200,
+			data: results
+		})
+	})
+	.catch(err => {
+		console.log(err)
+		callback({
+			status: 500,
+			data: err
+		})
+	})
+}
+
+function getPageInfo(id, callback) {
+	let pages;
+	let page;
+	let titles = "";
+	let result = {};
+
+	if(typeof id == 'object') {
+		callback({
+			status: 500,
+			data: "There should only be one id"
+		})
+	}
+
+	wiki.pagesByIdFetch([id])
+	.then(response => response.json())
+	.then(body => {
+		pages = body.query.pages;
+		pages = Object.values(pages);
+
+		if(pages.length != 1) {
+			callback({
+				status: 400,
+				data: "Invalid Id"
+			});
+			return;
+		}
+
+		//Check the page is a person
+		return selectPeople(body)
+	})
+	.catch(err => callback({status: 500, data: err}))
+	.then(ids => {
+		if(ids.length != 1 || id != ids[0]) {
+			callback({
+				status: 400,
+				data: "Not a person"
+			});
+			return;
+		}
+
+		page = pages[0];
+
+		result.id = id;
+		result.title = page.title;
+		result.description = getShortDescription(page.revisions[0]["*"]);
+
+		//Related People
+		let content = page.revisions[0]["*"];
+		let lastCharacter = "";
+		let linkCount = 0;
+		let readingName = false;
+		for(let i = 0, l = content.length; i < l; i += 1) {
+			if(content[i] == "[" && lastCharacter == "[") {
+				readingName = true;
+			} else if(readingName) {
+				if(content[i] == "]") {
+					readingName = false;
+					titles += "|";
+					linkCount += 1;
+				} else {
+					titles += content[i];
+				}
+			}
+
+			// Stop the query from getting too big
+			if(linkCount > 20) {
+				break;
+			}
+
+			lastCharacter = content[i];
+		}
+		titles = titles.slice(0, -1); //Remove the final '|'
+
+		//Get image
+		return wiki.imagesByIdFetch([id])
+	})
+	.then(response => response.json())
+	.then(body => {
+		let imageContent = body.query.pages[id];
+
+		if(imageContent.thumbnail && imageContent.thumbnail.source) {
+			result.image = imageContent.thumbnail.source;
+		} else {
+			result.image = "";
+		}
+
+		//Get the related people
+		return wiki.pagesByTitleFetch(titles);
+	})
+	.then(response => response.json())
+	.then(body => {
+		return selectPeople(body)
+	})
+	.catch(err => callback({status: 500, data: err}))
+	.then(ids => {
+		//Get images for related people
+		return wiki.imagesByIdFetch(ids)
+	})
+	.then(response => response.json())
+	.then(body => {
+		let data = body.query.pages;
+		data = Object.values(data);
+
+		let related = [];
+		for(let i = 0, length = data.length > 4? 4: data.length; i < length; i += 1) {
+			let person = {}
+			person.id = data[i].pageid;
+			person.title = data[i].title;
+
+			if(data[i].thumbnail && data[i].thumbnail.source) {
+				person.image = data[i].thumbnail.source;
+			} else {
+				person.image = "";
+			}
+
+			related.push(person);
+		}
+
+		result.related = related;
+
+
+		callback(result)
+	})
+	.catch(err => {
+		callback({
+			status: 500,
+			data: err
+		})
+	})
+}
+
+
 module.exports = {
 	search: search,
 	getPageInfo: getPageInfo,
-	getImages: getImages
-};
+
+	getPageIdsFromSearch: getPageIdsFromSearch,
+	selectPeople: selectPeople
+}

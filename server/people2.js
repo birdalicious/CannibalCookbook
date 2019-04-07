@@ -54,7 +54,7 @@ function getShortDescription(content) {
 	const descriptionStringTag = "short description|";
 	let descriptionIndex = content.indexOf(descriptionStringTag);
 	if(descriptionIndex == -1) {
-		return -1;
+		return "";
 	}
 	descriptionIndex += descriptionStringTag.length;
 
@@ -73,11 +73,19 @@ function search(query, callback) {
 	let peopleIds;
 	let results = [];
 
-	getPageIdsFromSearch(query)
-	.catch(err => callback({status: 500, data: err}))
-	.then(queries => {
+	wiki.searchFetch(query)
+	.then(response => response.json())
+	.then(body => {
+		let response = body.query.search;
+
+		let queries = [];
+		for(let i = 0, length = response.length; i < length; i += 1) {
+			queries.push(response[i].pageid)
+		}
+
 		return wiki.pagesByIdFetch(queries)
 	})
+	.catch(err => callback({status: 500, data: err}))
 	.then(response => response.json())
 	.then(body => {
 		pages = body.query.pages;

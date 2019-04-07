@@ -1,4 +1,5 @@
 {
+	"length": 5,
 	"generator": [
 		{
 			"title": "(*) panzanella",
@@ -7,54 +8,18 @@
 			"serves": 8,
 			"cooksIn": 100,
 			"ingredients": [
-				{
-					"name": "whole free-range (*)",
-					"quantity": "1.5kg"
-				},
-				{
-					"name": "olive oil",
-					"quantity": ""
-				},
-				{
-					"name": "bunch of fresh mixed herbs, such as sage, rosemary and thyme",
-					"quantity": ""
-				},
-				{
-					"name": "ciabatta loaf",
-					"quantity": "270g"
-				},
-				{
-					"name": "garlic",
-					"quantity": "1 bulb of"
-				},
-				{
-					"name": "mixed ripe tomatoes",
-					"quantity": "2kg"
-				},
-				{
-					"name": "fresh basil",
-					"quantity": "1 bunch of"
-				},
-				{
-					"name": "small red onion",
-					"quantity": "1"
-				},
-				{
-					"name": "red wine vinegar",
-					"quantity": ""
-				},
-				{
-					"name": "whole black olives",
-					"quantity": "100g"
-				},
-				{
-					"name": "baby capers",
-					"quantity": "2 tablespoons"
-				},
-				{
-					"name": "Parmesan cheese",
-					"quantity": ""
-				}
+				"1.5kg whole free-range (*)",
+				"olive oil",
+				"bunch of fresh mixed herbs, such as sage, rosemary and thyme",
+				"270g ciabatta loaf",
+				"1 bulb ofgarlic",
+				"2kg mixed ripe tomatoes",
+				"1 bunch of fresh basil",
+				"1 small red onion",
+				"red wine vinegar",
+				"100g whole black olives",
+				"2 tablespoons baby capers",
+				"Parmesan cheese"
 			],
 			"method": [
 				"Preheat the oven to 180ºC/350ºC/gas 4.",
@@ -78,38 +43,14 @@
 			"serves": 6,
 			"cooksIn": 50,
 			"ingredients": [
-				{
-					"name": "rhubarb",
-					"quantity": "750g"
-				},
-				{
-					"name": "runny honey",
-					"quantity": "6 tablespoons"
-				},
-				{
-					"name": "olive oil",
-					"quantity": ""
-				},
-				{
-					"name": "whole or flaked almonds",
-					"quantity": "75g"
-				},
-				{
-					"name": "fresh mixed herbs , such as parsley, mint or chives",
-					"quantity": "1 bunch of"
-				},
-				{
-					"name": "breadcrumbs",
-					"quantity": "1 handful of"
-				},
-				{
-					"name": "racks of (*)",
-					"quantity": "2"
-				},
-				{
-					"name": "Dijon mustard",
-					"quantity": "2 tablespoons"
-				}
+				"750g rhubarb",
+				"6 tablespoons runny honey",
+				"olive oil",
+				"75g whole or flaked almonds",
+				"1 bunch of fresh mixed herbs , such as parsley, mint or chives",
+				"1 handful of breadcrumbs",
+				"2 racks of (*)",
+				"2 tablespoons Dijon mustard"
 			],
 			"method": [
 				"Preheat the oven to 200ºC/gas 6.",
@@ -127,82 +68,25 @@
 			"serves": 6,
 			"cooksIn": 95,
 			"ingredients": [
-				{
-					"name": "(*)",
-					"quantity": ""
-				},
-				{
-					"name": "olive oil",
-					"quantity": ""
-				},
-				{
-					"name": "garlic",
-					"quantity": "6 cloves of"
-				},
-				{
-					"name": "onion",
-					"quantity": "1 large"
-				},
-				{
-					"name": "fennel",
-					"quantity": "1 bulb of"
-				},
-				{
-					"name": "leek",
-					"quantity": "1"
-				},
-				{
-					"name": "asparagus spears",
-					"quantity": "1 handful of"
-				},
-				{
-					"name": "fresh peas",
-					"quantity": "1 handful of"
-				},
-				{
-					"name": "broad beans",
-					"quantity": "1 handful of"
-				},
-				{
-					"name": "fresh flat-leaf parsley",
-					"quantity": "Half a bunch of"
-				},
-				{
-					"name": "fresh dill",
-					"quantity": "Half a bunch of"
-				},
-				{
-					"name": "fresh tarragon",
-					"quantity": "a few sprigs of"
-				},
-				{
-					"name": "organic (*) stock",
-					"quantity": "600 ml"
-				},
-				{
-					"name": "green olives",
-					"quantity": "1 large handful of"
-				},
-				{
-					"name": "tinned cannellini beans",
-					"quantity": "1 handful of"
-				},
-				{
-					"name": "lemons",
-					"quantity": "2"
-				},
-				{
-					"name": "free-range eggs",
-					"quantity": "2 large"
-				},
-				{
-					"name": "natural yoghurt",
-					"quantity": "2 tablespoons"
-				},
-				{
-					"name": "extra virgin olive oil",
-					"quantity": ""
-				}
+				"(*)",
+				"olive oil",
+				"6 cloves of garlic",
+				"1 large onion",
+				"1 bulb of fennel",
+				"1 leek",
+				"1 handful of asparagus spears",
+				"1 handful of fresh peas",
+				"1 handful of broad beans",
+				"Half a bunch of fresh flat-leaf parsley",
+				"Half a bunch of fresh dill",
+				"A few sprigs of fresh tarragon",
+				"600ml organic (*) stock",
+				"1 large handful of green olives",
+				"1 handful of tinned cannellini beans",
+				"2 lemons",
+				"2 large free-range eggs",
+				"2 tablespoonsnatural yoghurt",
+				"extra virgin olive oil"
 			],
 			"method": [
 				"Joint (*) into legs, thighs, breasts and arms.",
@@ -223,26 +107,11 @@
 			"serves": 4,
 			"cooksIn": 15,
 			"ingredients": [
-				{
-					"name": "white basmati rice",
-					"quantity": "300g"
-				},
-				{
-					"name": "green olive tapenade",
-					"quantity": "6 heaped teaspoons"
-				},
-				{
-					"name": "ripe mixed-colour cherry tomatoes",
-					"quantity": "350g"
-				},
-				{
-					"name": "fresh basil",
-					"quantity": "Half a bunch of"
-				},
-				{
-					"name": "(*) fillets",
-					"quantity": "500g"
-				}
+				"300g white basmati rice",
+				"6 heaped teaspoons green olive tapenade",
+				"350g ripe mixed-colour cherry tomatoes",
+				"Half a bunch of fresh basil",
+				"500g (*) fillets"
 			],
 			"method": [
 				"In a large shallow casserole pan on a high heat, mix the rice with 2 heaped teaspoons of tapenade, then pour over 600ml of water. Put the lid on and let it come to the boil while you halve the tomatoes and, in a bowl, mix them with 1 tablespoon each of olive oil and red wine vinegar. Taste, season to perfection with sea salt and black pepper, and tear in most of the basil leaves. <br> Cut the fish into four equal-sized pieces and place in the pan, pushing them into the rice. Scatter over the dressed tomatoes. Put the lid back on and boil for 10 minutes, or until the rice is cooked through, then remove the lid and cook for a further 2 minutes until all the liquid has evaporated. Spoon the remaining tapenade over the fish, pick over the remaining basil leaves, drizzle lightly with extra virgin olive oil, and dish up."
@@ -255,34 +124,13 @@
 			"serves": 4,
 			"cooksIn": 40,
 			"ingredients": [
-				{
-					"name": "unsalted butter",
-					"quantity": "50g"
-				},
-				{
-					"name": "leeks",
-					"quantity": "2 medium"
-				},
-				{
-					"name": "(*) fillets, skin off, boned",
-					"quantity": "4"
-				},
-				{
-					"name": "dry vermouth , or dry white wine",
-					"quantity": "8 tablespoons"
-				},
-				{
-					"name": "organic chicken stock",
-					"quantity": "4 tablespoons"
-				},
-				{
-					"name": "baby capers",
-					"quantity": "1 tablespoon"
-				},
-				{
-					"name": "fresh dill",
-					"quantity": "A few sprigs of"
-				}
+				"50g unsalted butter",
+				"2 medium leeks",
+				"4 (*) fillets, skin off, boned",
+				"8 tablespoons dry vermouth , or dry white wine",
+				"4 tablespoonsorganic chicken stock",
+				"1 tablespoon baby capers",
+				"A few sprigs of fresh dill"
 			],
 			"method": [
 				"Preheat the oven to 200ºC/400ºF/gas 6.",
@@ -298,10 +146,7 @@
 			"serves": 0,
 			"cooksIn": 0,
 			"ingredients": [
-				{
-					"name": "",
-					"quantity": ""
-				}
+				""
 			],
 			"method": [
 				
