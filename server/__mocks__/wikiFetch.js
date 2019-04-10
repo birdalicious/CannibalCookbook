@@ -1,37 +1,39 @@
 const searchFetch = function(query) {
 	return Promise.resolve(
-		require("./searchSteveIrwin.json")
+		{
+			json: function() {return require("./searchSteveIrwin.json")}
+		}
     );
 }
 
 const pagesByIdFetch = function(queries) {
 	if(queries == "select people") {
-		return Promise.resolve(
-			require("./pagesIrwin.json")
-		);
+		return Promise.resolve({
+			json: function() { return require("./pagesIrwin.json")}
+		});
 	} else {
-		return Promise.resolve(
-			require("./pageSteveIrwin.json")
-		);
+		return Promise.resolve({
+			json: function() {return require("./pageSteveIrwin.json")}
+		});
 	}
 }
 
 const pagesByTitleFetch = function(stringQueries) {
-	return Promise.resolve(
-		require("./titlesFetch.json")
-	);
+	return Promise.resolve({
+		json: function() {return require("./titlesFetch.json")}
+	});
 }
 
 const imagesByIdFetch = function(queries) {
 	if(queries.length == 1) {
-		return Promise.resolve(
-			require("./singleImage.json")
-		);
+		return Promise.resolve({
+			json: function() {return require("./singleImage.json")}
+		});
 	}
 	else {
-		return Promise.resolve(
-			require("./multipleImages.json")
-		);
+		return Promise.resolve({
+			json: function() {return require("./multipleImages.json")}
+		});
 	}
 }
 
