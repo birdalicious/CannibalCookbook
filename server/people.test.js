@@ -1,5 +1,5 @@
 jest.mock("./wikiFetch");
-const people = require("./people2.js")
+const people = require("./people.js")
 
 test("search", done => {
 	people.search("steve irwin", (data) => {

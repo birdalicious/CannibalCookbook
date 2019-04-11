@@ -2,10 +2,8 @@ const express = require("express");
 const fetch = require("node-fetch");
 const seedrandom = require("seedrandom");
 
-const recipe2 = require("./server/recipe2.js")
-
 const people = require("./server/people.js");
-const recipes = require("./server/recipes.js");
+const recipes = require("./server/recipe2.js");
 
 const app = express();
 
@@ -55,8 +53,9 @@ app.get("/api/people/image/:query/", function(req, resp){
 
 
 app.get("/test", function(req,resp) {
-	recipe2.getRecipeData("Steve", 736)
-	.then(data => resp.send(data))
+	people2.getPageInfo(6873934, (data) => {
+		resp.send(data)
+	})
 })
 
 app.get("/random", function(req, resp){

@@ -1,30 +1,40 @@
-const seedrandom = require("seedrandom");
-const recipes = require("./recipes.json");
 const people = require("./people.js");
+const util = require("./recipeUtil.js");
 
-function getRecipeData(title, id) {
-	return new Promise((resolve, reject) => {
-		let rng = seedrandom(parseInt(id));
-		let random = rng();
+function search(query, callback) {
+	let peopleData;
+	let results = [];
 
-		let recipeIndex = Math.floor(random*recipes.length);
+	//search wiki
+	people.search(query, (data) => {
+		peopleData = data.data;
 
-		let recipe = recipes.generator[recipeIndex];
-
-		recipe.title = recipe.title.replace("(*)", title);
-		recipe.intro = recipe.intro.replace("(*)", title);
-
-		for(let i = 0; i < recipe.ingredients.length; i += 1) {
-			recipe.ingredients[i] = recipe.ingredients[i].replace("(*)", title);
-		}
-		for(let i = 0; i < recipe.method.length; i += 1) {
-			recipe.method[i] = recipe.method[i].replace("(*)", title);
+		if(data.status != 200) {
+			callback({
+				status: data.status,
+				data: data.data
+			});
+			return;
 		}
 
-		resolve(recipe);
-	});
+		let searchPromises = [];
+
+		//collate people data with recipe data
+		for(let i = 0, length = peopleData.length; i < length; i += 1) {
+			searchPromises.push(
+				util.getSearchResult(peopleData[i])
+			);
+		}
+
+		Promise.all(searchPromises)
+		.then(results => callback({
+			status: 200,
+			data: results
+		}));
+	})
 }
 
+
 module.exports = {
-	getRecipeData: getRecipeData
+	search: search
 }
