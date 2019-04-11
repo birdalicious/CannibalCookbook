@@ -115,7 +115,7 @@ function fillInRecipe(content) {
 	HTML += "<ul>"
 
 	for(let i = 0, ingredients = content.ingredients, length = ingredients.length; i < length; i += 1) {
-		HTML += "<li>" + ingredients[i].quantity + " " + ingredients[i].name + "</li>"
+		HTML += "<li>" + ingredients[i] + "</li>"
 	}
 
 	HTML += "</ul>"

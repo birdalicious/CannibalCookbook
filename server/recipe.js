@@ -87,10 +87,16 @@ function getRecipe(id, callback) {
 			result.related = [];
 
 			for(let i = 0, related = personData.related, length = related.length; i < length; i += 1) {
+				let image;
+				if(related[i].image != ""){
+					image = related[i].image;
+				} else {
+					image = results[i].image
+				}
 				result.related.push({
 					id: related[i].id,
 					title: results[i].title,
-					image: results[i].image
+					image: image
 				});
 			}
 
