@@ -1,5 +1,4 @@
 jest.mock("./wikiFetch");
-jest.mock("./people");
 const util = require("./recipeUtil.js");
 const people = require("./people.js");
 
