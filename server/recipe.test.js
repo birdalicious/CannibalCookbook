@@ -2,7 +2,7 @@ jest.mock("./wikiFetch");
 jest.mock("./people");
 const people = require("./people.js")
 const util = require("./recipeUtil.js");
-const recipe = require("./recipe2.js");
+const recipe = require("./recipe.js");
 
 test("search", done => {
 	recipe.search("This input doesn't matter", (data) => {

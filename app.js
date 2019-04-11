@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 const seedrandom = require("seedrandom");
 
 const people = require("./server/people.js");
-const recipes = require("./server/recipe2.js");
+const recipes = require("./server/recipe.js");
 
 const app = express();
 
