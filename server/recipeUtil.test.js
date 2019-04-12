@@ -48,7 +48,7 @@ test("getSearchResult", done => {
 				expect(result.serves).not.toBe("");
 				expect(result.cooksIn).not.toBe("");
 
-				done()
+				done();
 			});
 	});
 });

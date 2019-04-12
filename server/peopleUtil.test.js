@@ -75,6 +75,6 @@ test("getRelatedLinks", () => {
 			return peopleUtil.getRelatedLinks(content);
 		})
 		.then(titles => {
-			expect(titles).toBe("Essendon, Victoria|Batt Reef|Queensland|Stingray injury|heart|Natural history|Naturalist|zoologist|Conservation movement|conservationist|Nature documentary|television personality|herpetologist|The Crocodile Hunter|Bob Irwin|Terri Irwin|Terri Raines|Bindi Irwin|Bindi Sue Irwin|Robert Irwin (television personality)|Robert Clarence Irwin|The Crocodile Hunter|nature documentary|wildlife documentary|Terri Irwin|Terri|Croc Files|The Crocodile Hunter Diaries|Australia Zoo");
+			expect(titles).toBe("Essendon, Victoria|Batt Reef|Queensland|Stingray injury|heart|Natural history|Naturalist|zoologist|Conservation movement|conservationist|Nature documentary|television personality|herpetologist|The Crocodile Hunter|Bob Irwin|Terri Irwin|Terri Raines|Bindi Irwin|Bindi Sue Irwin|Robert Irwin (television personality)|Robert Clarence Irwin|The Crocodile Hunter|nature documentary|wildlife documentary|Terri Irwin|Terri|Croc Files|The Crocodile Hunter Diaries|Australia Zoo|Beerwah, Queensland|Beerwah|Queensland|Brisbane|stingray|Ocean's Deadliest");
 		});
 });

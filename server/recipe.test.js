@@ -67,5 +67,5 @@ test("homepage", done => {
 		expect(data.data[0].description).not.toBe("");
 
 		done();
-	})
-})
+	});
+});

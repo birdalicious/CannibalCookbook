@@ -32,8 +32,8 @@ test("searchByPageId", done => {
 		expect(data.data[0]).toHaveProperty("image");
 
 		done();
-	})
-})
+	});
+});
 
 test("getPageInfo", done => {
 	people.getPageInfo(6873934, (data) => {

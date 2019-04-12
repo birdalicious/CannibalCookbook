@@ -131,7 +131,7 @@ function getRelatedLinks(content) {
 				}
 
 				// Stop the query from getting too big
-				if(linkCount > 20) {
+				if(linkCount > 49) {
 					break;
 				}
 

@@ -4,7 +4,9 @@ let recipeContainer = document.getElementById("recipeContainer");
 var searchResults;
 
 //Load homepage results
-window.onload = function() {
+window.onload = homepage;
+
+function homepage() {
 	recipeContainer.innerHTML = "";
 	searchContainer.innerHTML = "<img src=\"./assets/loading.gif\" id=\"loadingImage\">";
 	
@@ -16,7 +18,7 @@ window.onload = function() {
 		.catch(() => {
 			searchContainer.innerHTML = "<div id=\"noResults\"> An error occured :( </div>";
 		});
-};
+}
 
 searchBox.addEventListener("keyup", function(event) {
 	// Number 13 is the "Enter" key on the keyboard
@@ -25,6 +27,11 @@ searchBox.addEventListener("keyup", function(event) {
 		event.preventDefault();
 		
 		let query = this.value;
+
+		if(query == "") {
+			homepage();
+			return;
+		}
 		
 		recipeContainer.innerHTML = "";
 		searchContainer.innerHTML = "<img src=\"./assets/loading.gif\" id=\"loadingImage\">";
