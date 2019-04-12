@@ -1,8 +1,8 @@
 jest.mock("./wikiFetch");
 const people = require("./people.js");
 
-test("search", done => {
-	people.search("steve irwin", (data) => {
+test("searchByQuery", done => {
+	people.searchByQuery("does anything matter anymore?", (data) => {
 		expect(data).toHaveProperty("status");
 		expect(data).toHaveProperty("data");
 
@@ -17,6 +17,23 @@ test("search", done => {
 		done();
 	});
 });
+
+test("searchByPageId", done => {
+	people.searchByPageIds("doesn't matter, it's all pointless", (data) => {
+		expect(data).toHaveProperty("status");
+		expect(data).toHaveProperty("data");
+
+		expect(data.status).toBe(200);
+
+		expect(data.data.length).toBe(1);
+		expect(data.data[0]).toHaveProperty("id");
+		expect(data.data[0]).toHaveProperty("title");
+		expect(data.data[0]).toHaveProperty("description");
+		expect(data.data[0]).toHaveProperty("image");
+
+		done();
+	})
+})
 
 test("getPageInfo", done => {
 	people.getPageInfo(6873934, (data) => {

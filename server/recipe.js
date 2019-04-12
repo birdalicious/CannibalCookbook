@@ -5,7 +5,7 @@ function search(query, callback) {
 	let peopleData;
 
 	//search wiki
-	people.search(query, (data) => {
+	people.searchByQuery(query, (data) => {
 		peopleData = data.data;
 
 		if(data.status != 200) {
@@ -19,6 +19,37 @@ function search(query, callback) {
 		let searchPromises = [];
 
 		//collate people data with recipe data
+		for(let i = 0, length = peopleData.length; i < length; i += 1) {
+			searchPromises.push(
+				util.getSearchResult(peopleData[i])
+			);
+		}
+
+		Promise.all(searchPromises)
+			.then(results => callback({
+				status: 200,
+				data: results
+			}))
+			.catch(err => callback({
+				status: 500,
+				data: err
+			}));
+	});
+}
+
+function homepageSearch(callback) {
+	let ids = [6873934, 63390, 10489, 102994, 104940, 166103, 636344];
+	people.searchByPageIds(ids, (results) => {
+		if(results.status != 200) {
+			callback({
+				status: results.status,
+				data: results.data
+			});
+		}
+
+		let peopleData = results.data;
+
+		let searchPromises = [];
 		for(let i = 0, length = peopleData.length; i < length; i += 1) {
 			searchPromises.push(
 				util.getSearchResult(peopleData[i])
@@ -113,5 +144,6 @@ function getRecipe(id, callback) {
 
 module.exports = {
 	search: search,
+	homepageSearch: homepageSearch,
 	getRecipe: getRecipe
 };

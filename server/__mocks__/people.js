@@ -1,4 +1,8 @@
-function search(query, callback) {
+function searchByQuery(query, callback) {
+	callback(require("./peopleSearchSteveIrwin.json"));
+}
+
+function searchByPageIds(ids, callback) {
 	callback(require("./peopleSearchSteveIrwin.json"));
 }
 
@@ -7,6 +11,7 @@ function getPageInfo(id, callback) {
 }
 
 module.exports = {
-	search: search,
+	searchByQuery: searchByQuery,
+	searchByPageIds: searchByPageIds,
 	getPageInfo: getPageInfo
 };

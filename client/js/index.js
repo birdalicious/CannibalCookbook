@@ -3,8 +3,20 @@ let searchContainer = document.getElementById("searchContainer");
 let recipeContainer = document.getElementById("recipeContainer");
 var searchResults;
 
-window.addEventListener("resize", setSearchBoxSize);
-window.onload = setSearchBoxSize;
+//Load homepage results
+window.onload = function() {
+	recipeContainer.innerHTML = "";
+	searchContainer.innerHTML = "<img src=\"./assets/loading.gif\" id=\"loadingImage\">";
+	
+	fetch("/api/recipes/homepage")
+		.then(response => response.json())
+		.then(body => {
+			fillInSearch(body);
+		})
+		.catch(() => {
+			searchContainer.innerHTML = "<div id=\"noResults\"> An error occured :( </div>";
+		});
+};
 
 searchBox.addEventListener("keyup", function(event) {
 	// Number 13 is the "Enter" key on the keyboard
@@ -21,56 +33,7 @@ searchBox.addEventListener("keyup", function(event) {
 			.then(response => response.text())
 			.then(body => {
 				body = JSON.parse(body);
-
-				searchContainer.innerHTML = "";
-
-				let people = body.data;
-
-				if(people.length == 0) {
-					searchContainer.innerHTML = "<div id=\"noResults\"> No results found :( </div>";
-					return;
-				}
-
-				for(let i = 0; i < people.length; i += 1) {
-					let time = "";
-					if(people[i].cooksIn > 60) {
-						time += Math.floor(people[i].cooksIn/60) + "h " + people[i].cooksIn%60 + "mins";
-					} else {
-						time += people[i].cooksIn + "mins";
-					}
-
-					let description;
-					let maxDesLen = 175;
-					if(people[i].description.length > maxDesLen) {
-						description = people[i].description.slice(0, maxDesLen) + "...";
-					} else {
-						description = people[i].description;
-					}
-
-					let html = "";
-
-					html += "<div class=\"resultCard\" id=\"" + people[i].id + "\">";
-
-					html += "<div class=\"resultImg\" style=\"background-image: url('" + people[i].image + "')\"></div>";
-
-					html += "<div class=\"resultTitle\">" + people[i].title + "</div>";
-
-					html += "<div class=\"resultDescription\">" + description + "</div>";
-
-					html += "<div class=\"resultCooksIn\">Cooks in " + time + "</div>";
-				
-					html +=  "<div class=\"resultServes\">Serves " + people[i].serves + "</div>";
-
-					html += "</div>";
-
-					searchContainer.innerHTML += html;
-				}
-
-				searchResults = document.getElementsByClassName("resultCard");
-
-				for(let i = 0; i < searchResults.length; i += 1) {
-					searchResults[i].addEventListener("click", clickSearchResult);
-				}
+				fillInSearch(body);
 			})
 			.catch(() => {
 				searchContainer.innerHTML = "<div id=\"noResults\"> An error occured :( </div>";
@@ -103,7 +66,62 @@ function clickSearchResult() {
 				recommended[i].addEventListener("click", clickSearchResult);
 			}	
 
+		})
+		.catch(() => {
+			searchContainer.innerHTML = "<div id=\"noResults\"> An error occured :( </div>";
 		});
+}
+
+function fillInSearch(body) {
+	searchContainer.innerHTML = "";
+
+	let people = body.data;
+
+	if(people.length == 0) {
+		searchContainer.innerHTML = "<div id=\"noResults\"> No results found :( </div>";
+		return;
+	}
+
+	for(let i = 0; i < people.length; i += 1) {
+		let time = "";
+		if(people[i].cooksIn > 60) {
+			time += Math.floor(people[i].cooksIn/60) + "h " + people[i].cooksIn%60 + "mins";
+		} else {
+			time += people[i].cooksIn + "mins";
+		}
+
+		let description;
+		let maxDesLen = 175;
+		if(people[i].description.length > maxDesLen) {
+			description = people[i].description.slice(0, maxDesLen) + "...";
+		} else {
+			description = people[i].description;
+		}
+
+		let html = "";
+
+		html += "<div class=\"resultCard\" id=\"" + people[i].id + "\">";
+
+		html += "<div class=\"resultImg\" style=\"background-image: url('" + people[i].image + "')\"></div>";
+
+		html += "<div class=\"resultTitle\">" + people[i].title + "</div>";
+
+		html += "<div class=\"resultDescription\">" + description + "</div>";
+
+		html += "<div class=\"resultCooksIn\">Cooks in " + time + "</div>";
+	
+		html +=  "<div class=\"resultServes\">Serves " + people[i].serves + "</div>";
+
+		html += "</div>";
+
+		searchContainer.innerHTML += html;
+	}
+
+	searchResults = document.getElementsByClassName("resultCard");
+
+	for(let i = 0; i < searchResults.length; i += 1) {
+		searchResults[i].addEventListener("click", clickSearchResult);
+	}
 }
 
 function fillInRecipe(content) {
@@ -145,9 +163,9 @@ function fillInRecipe(content) {
 
 	let time;
 	if(content.cooksIn > 60) {
-		time = Math.floor(content.cooksIn / 60) + "hr " + content.cooksIn % 60 + "mins"
+		time = Math.floor(content.cooksIn / 60) + "hr " + content.cooksIn % 60 + "mins";
 	} else {
-		time = content.cooksIn + " minutes"
+		time = content.cooksIn + " minutes";
 	}
 
 	HTML += "<div id=\"recipeCookingInfo\">Cooks In: " + time + "<br>Serves: " + content.serves + "</div>";
@@ -197,17 +215,4 @@ function fillInRecipe(content) {
 
 	searchContainer.innerHTML = "";
 	recipeContainer.innerHTML = HTML;
-}
-
-function setSearchBoxSize() {
-	let width = window.innerWidth;
-
-	if(width < 608) {
-		searchBox.style.padding = "";
-		searchBox.style.width = (width - 20 - 4) + "px";
-
-		// document.getElementById("recipeMain").style.width = width
-	} else {
-		searchBox.style.width = "584px";
-	}
 }

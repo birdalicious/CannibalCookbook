@@ -1,11 +1,7 @@
 const wiki = require("./wikiFetch.js");
 const util = require("./peopleUtil.js");
 
-function search(query, callback) {
-	let pages;
-	let peopleIds;
-	let results = [];
-
+function searchByQuery(query, callback) {
 	//get ids
 	util.getPageIdsFromSearch(query)
 		.then(queries => {
@@ -14,40 +10,72 @@ function search(query, callback) {
 		})
 		.then(response => response.json())
 		.then(body => {
-			pages = body.query.pages;
-
-			return util.selectPeople(body);
+			return getSearchResults(body);
 		})
-		.then(ids => {
-			peopleIds = ids;
-
-			//get images
-			return util.getImages(ids);
-		})
-		.then(images => {
-		//collect all the data
-			for(let i = 0, length = peopleIds.length; i < length; i += 1) {
-				let result = {};
-				let personContent = pages[peopleIds[i]];
-				let image = images[peopleIds[i]];
-
-				result.id = peopleIds[i];
-				result.title = personContent.title;
-				result.description = util.getShortDescription(personContent);
-				result.image = image;
-
-				results.push(result);
-			}
-
-			callback({
-				status: 200,
-				data: results
-			});
-		})
+		.then(results => callback({
+			status: 200,
+			data: results
+		}))
 		.catch(err => callback({
 			status: 500,
 			data: err
 		}));
+}
+
+function searchByPageIds(ids, callback) {
+	wiki.pagesByIdFetch(ids)
+		.then(response => response.json())
+		.then(body => {
+			return getSearchResults(body);
+		})
+		.then(results => callback({
+			status: 200,
+			data: results
+		}))
+		.catch(err => callback({
+			status: 500,
+			data: err
+		}));
+}
+
+function getSearchResults(body) {
+	return new Promise((resolve, reject) => {
+		let pages;
+		let peopleIds;
+		let results = [];
+
+		try {
+			pages = body.query.pages;
+			//select people
+			util.selectPeople(body)
+				.then(ids => {
+					peopleIds = ids;
+
+					//get images
+					return util.getImages(ids);
+				})
+				.then(images => {
+				//collect all the data
+					for(let i = 0, length = peopleIds.length; i < length; i += 1) {
+						let result = {};
+						let personContent = pages[peopleIds[i]];
+						let image = images[peopleIds[i]];
+
+						result.id = peopleIds[i];
+						result.title = personContent.title;
+						result.description = util.getShortDescription(personContent);
+						result.image = image;
+
+						results.push(result);
+					}
+
+					resolve(results);
+				})
+				.catch(err => reject(err));
+		} catch(err) {
+			reject(err);
+		}
+	});
 }
 
 function getPageInfo(id, callback) {
@@ -151,6 +179,7 @@ function getPageInfo(id, callback) {
 
 
 module.exports = {
-	search: search,
+	searchByQuery: searchByQuery,
+	searchByPageIds: searchByPageIds,
 	getPageInfo: getPageInfo
 };

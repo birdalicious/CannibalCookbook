@@ -31,7 +31,7 @@ test("getRecipeData", done => {
 });
 
 test("getSearchResult", done => {
-	people.search("This doesn't matter", (data) => {
+	people.searchByQuery("This doesn't matter", (data) => {
 		let personData = data.data[0];
 
 		util.getSearchResult(personData)
