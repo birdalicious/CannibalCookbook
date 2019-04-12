@@ -3,7 +3,6 @@ const util = require("./recipeUtil.js");
 
 function search(query, callback) {
 	let peopleData;
-	let results = [];
 
 	//search wiki
 	people.search(query, (data) => {
@@ -27,15 +26,15 @@ function search(query, callback) {
 		}
 
 		Promise.all(searchPromises)
-		.then(results => callback({
-			status: 200,
-			data: results
-		}))
-		.catch(err => callback({
-			status: 500,
-			data: err
-		}));
-	})
+			.then(results => callback({
+				status: 200,
+				data: results
+			}))
+			.catch(err => callback({
+				status: 500,
+				data: err
+			}));
+	});
 }
 
 function getRecipe(id, callback) {
@@ -53,66 +52,66 @@ function getRecipe(id, callback) {
 
 		//Get the recipe
 		util.getRecipeData(personData.title, personData.id)
-		.then(recipe => {
+			.then(recipe => {
 			//Bind the data together
-			result.id = personData.id;
-			result.title = recipe.title;
-			result.intro = recipe.intro;
-			result.foodImage = recipe.image;
-			result.personImage = personData.image;
-			result.serves = recipe.serves;
-			result.cooksIn = recipe.cooksIn;
-			result.ingredients = recipe.ingredients;
-			result.method = recipe.method;
+				result.id = personData.id;
+				result.title = recipe.title;
+				result.intro = recipe.intro;
+				result.foodImage = recipe.image;
+				result.personImage = personData.image;
+				result.serves = recipe.serves;
+				result.cooksIn = recipe.cooksIn;
+				result.ingredients = recipe.ingredients;
+				result.method = recipe.method;
 
-			//Get the recipes for the related people
-			let relatedPromises = [];
-			for(let i = 0, related = personData.related, length = related.length; i < length; i += 1) {
-				relatedPromises.push(
-					util.getRecipeData(related[i].title, related[i].id)
-				);
-			}
-
-			return Promise.all(relatedPromises);
-		})
-		.then(results => {
-			if(results.length != personData.related.length) {
-				callback({
-					status: 500,
-					data: "Problem with related people"
-				});
-				return;
-			}
-
-			result.related = [];
-
-			for(let i = 0, related = personData.related, length = related.length; i < length; i += 1) {
-				let image;
-				if(related[i].image != ""){
-					image = related[i].image;
-				} else {
-					image = results[i].image
+				//Get the recipes for the related people
+				let relatedPromises = [];
+				for(let i = 0, related = personData.related, length = related.length; i < length; i += 1) {
+					relatedPromises.push(
+						util.getRecipeData(related[i].title, related[i].id)
+					);
 				}
-				result.related.push({
-					id: related[i].id,
-					title: results[i].title,
-					image: image
-				});
-			}
 
-			callback({
-				status: 200,
-				data: result
+				return Promise.all(relatedPromises);
 			})
-		})
-		.catch(err => callback({
-			status: 500,
-			data: err
-		}));
+			.then(results => {
+				if(results.length != personData.related.length) {
+					callback({
+						status: 500,
+						data: "Problem with related people"
+					});
+					return;
+				}
+
+				result.related = [];
+
+				for(let i = 0, related = personData.related, length = related.length; i < length; i += 1) {
+					let image;
+					if(related[i].image != ""){
+						image = related[i].image;
+					} else {
+						image = results[i].image;
+					}
+					result.related.push({
+						id: related[i].id,
+						title: results[i].title,
+						image: image
+					});
+				}
+
+				callback({
+					status: 200,
+					data: result
+				});
+			})
+			.catch(err => callback({
+				status: 500,
+				data: err
+			}));
 	});
 }
 
 module.exports = {
 	search: search,
 	getRecipe: getRecipe
-}
+};

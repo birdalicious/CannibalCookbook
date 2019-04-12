@@ -1,7 +1,5 @@
 jest.mock("./wikiFetch");
 jest.mock("./people");
-const people = require("./people.js")
-const util = require("./recipeUtil.js");
 const recipe = require("./recipe.js");
 
 test("search", done => {
@@ -14,7 +12,7 @@ test("search", done => {
 		expect(data.data[0]).toHaveProperty("title");
 		expect(data.data[0]).toHaveProperty("id");
 		expect(data.data[0]).toHaveProperty("image");
-		expect(data.data[0]).toHaveProperty("description")
+		expect(data.data[0]).toHaveProperty("description");
 
 		expect(data.status).toBe(200);
 
@@ -22,7 +20,7 @@ test("search", done => {
 		expect(data.data[0].description).not.toBe("");
 
 		done();
-	})
+	});
 });
 
 test("getRecipe", done => {
@@ -47,6 +45,6 @@ test("getRecipe", done => {
 		expect(data.data.related[0]).toHaveProperty("title");
 		expect(data.data.related[0]).toHaveProperty("image");
 
-		done()
-	})
-})
+		done();
+	});
+});

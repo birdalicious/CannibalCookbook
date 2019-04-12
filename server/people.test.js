@@ -1,5 +1,5 @@
 jest.mock("./wikiFetch");
-const people = require("./people.js")
+const people = require("./people.js");
 
 test("search", done => {
 	people.search("steve irwin", (data) => {
@@ -15,7 +15,7 @@ test("search", done => {
 		expect(data.data[0]).toHaveProperty("image");
 
 		done();
-	})
+	});
 });
 
 test("getPageInfo", done => {
@@ -35,5 +35,5 @@ test("getPageInfo", done => {
 		expect(data.data.related.length).toBe(4);
 
 		done();
-	})
+	});
 });

@@ -1,14 +1,14 @@
 const fetch = require("node-fetch");
 
 function convertQueryArrayToString(queries) {
-	let string = ""
-	let length = queries.length
+	let string = "";
+	let length = queries.length;
 	for(let i = 0; i < length - 1; i += 1) {
-		string += queries[i] + "|"
+		string += queries[i] + "|";
 	}
 	string += queries[length - 1];
 
-	return string
+	return string;
 }
 
 function searchFetch(query) {
@@ -39,4 +39,4 @@ module.exports = {
 	pagesByIdFetch: pagesByIdFetch,
 	pagesByTitleFetch: pagesByTitleFetch,
 	imagesByIdFetch: imagesByIdFetch
-}
+};

@@ -1,4 +1,4 @@
-const wiki = require("./wikiFetch.js")
+const wiki = require("./wikiFetch.js");
 
 function getPageIdsFromSearch(query) {
 	return new Promise((resolve, reject) => {
@@ -9,24 +9,24 @@ function getPageIdsFromSearch(query) {
 		try {
 			//Get the page results
 			wiki.searchFetch(query)
-			.then(response => response.json())
-			.then(body => {
-				let response = body.query.search;
+				.then(response => response.json())
+				.then(body => {
+					let response = body.query.search;
 
-				let queries = [];
-				for(let i = 0, length = response.length; i < length; i += 1) {
-					queries.push(response[i].pageid)
-				}
+					let queries = [];
+					for(let i = 0, length = response.length; i < length; i += 1) {
+						queries.push(response[i].pageid);
+					}
 
-				resolve(queries)
-			})
-			.catch(err => {
-				reject(err)
-			});
+					resolve(queries);
+				})
+				.catch(err => {
+					reject(err);
+				});
 		} catch(err) {
 			reject(err);
 		}
-	})
+	});
 }
 
 function selectPeople(body) {
@@ -51,10 +51,10 @@ function selectPeople(body) {
 				}
 			}
 
-			resolve(ids)
+			resolve(ids);
 
 		} catch(err) {
-			reject(err)
+			reject(err);
 		}
 	});
 }
@@ -84,28 +84,28 @@ function getImages(queries) {
 		try {
 
 			wiki.imagesByIdFetch(queries)
-			.then(response => response.json())
-			.then(body => {
-				let result = {}
+				.then(response => response.json())
+				.then(body => {
+					let result = {};
 
-				for(let i = 0, length = queries.length; i < length; i += 1) {
-					let imageContent = body.query.pages[queries[i]];
+					for(let i = 0, length = queries.length; i < length; i += 1) {
+						let imageContent = body.query.pages[queries[i]];
 
-					if(imageContent.thumbnail && imageContent.thumbnail.source) {
-						result[queries[i]] = imageContent.thumbnail.source;
-					} else {
-						result[queries[i]] = "";
+						if(imageContent.thumbnail && imageContent.thumbnail.source) {
+							result[queries[i]] = imageContent.thumbnail.source;
+						} else {
+							result[queries[i]] = "";
+						}
 					}
-				}
 
-				resolve(result);
-			})
-			.catch(err => reject(err));
+					resolve(result);
+				})
+				.catch(err => reject(err));
 
 		} catch(err) {
 			reject(err);
 		}
-	})
+	});
 }
 
 function getRelatedLinks(content) {
@@ -139,12 +139,12 @@ function getRelatedLinks(content) {
 			}
 			titles = titles.slice(0, -1); //Remove the final '|'
 
-			resolve(titles)
+			resolve(titles);
 
 		} catch(err) {
 			reject(err);
 		}
-	})
+	});
 }
 
 module.exports = {
@@ -153,4 +153,4 @@ module.exports = {
 	getShortDescription: getShortDescription,
 	getImages: getImages,
 	getRelatedLinks: getRelatedLinks
-}
+};

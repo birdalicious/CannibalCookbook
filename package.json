@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "dev": "nodemon server.js",
+    "pretest": "eslint --ignore-path .eslintignore .",
     "lecter": "echo \"I'm having an old friend for dinner.\""
   },
   "repository": {
