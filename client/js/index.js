@@ -141,9 +141,16 @@ function fillInRecipe(content) {
 
 	if(content.intro != "") {
 		HTML += "<div id=\"recipeIntro\">" + content.intro + "<hr></div>";
-	}	
+	}
 
-	HTML += "<div id=\"recipeCookingInfo\">Cooks In: " + content.cooksIn + "<br>Serves: " + content.serves + "</div>";
+	let time;
+	if(content.cooksIn > 60) {
+		time = Math.floor(content.cooksIn / 60) + "hr " + content.cooksIn % 60 + "mins"
+	} else {
+		time = content.cooksIn + " minutes"
+	}
+
+	HTML += "<div id=\"recipeCookingInfo\">Cooks In: " + time + "<br>Serves: " + content.serves + "</div>";
 
 	HTML += "</div>";
 

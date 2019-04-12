@@ -75,12 +75,29 @@ h1, h2, h3 {
 	box-sizing: border-box;
 }
 
+#recipePersonImage {
+	visibility: hidden;
+}
+
+#recipeLeft {
+	grid-template-columns: 0 100%;
+}
+
+#recipeIngredients {
+	margin-left: 25px;
+}
+
 #recipeMain {
-	grid-template-columns: 100px auto;
+	grid-template-columns: 100%;
+	grid-template-areas:
+	'image'
+	'info'
+	'method';
 }
 
 #recipeFoodImage {
-	width: 100px;
+	margin: 0 auto;
+	/*width: 100px;*/
 }
 
 }
