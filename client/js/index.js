@@ -184,7 +184,7 @@ function fillInRecipe(content) {
 	} else {
 		HTML += "<br> No recommended recipes <br>";
 	}
-	HTML += "</div>";
+	HTML += "</div><br>";
 
 
 

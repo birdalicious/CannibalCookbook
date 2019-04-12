@@ -53,18 +53,26 @@ h1, h2, h3 {
 
 @media only screen and (max-width: 608px) {
 
+* {
+	overflow-x: hidden;
+}
+
 #searchBox {
+	/*margin-right: 10px;*/
 	width: 100%;
-	/*padding: 0;*/
+	box-sizing: border-box;
+	/*padding: 7px 10px;*/
 }
 
 #searchContainer {
 	width: 100%;
+	box-sizing: border-box;
 	margin: 0;
 }
 
 #recipeContainer, #recipeMain, #recipeLeft, #recipeRight {
 	width: 100%;
+	box-sizing: border-box;
 }
 
 #recipeMain {
