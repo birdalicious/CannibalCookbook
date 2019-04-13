@@ -54,7 +54,7 @@ h1, h2, h3 {
 @media only screen and (max-width: 608px) {
 
 * {
-	/*overflow-x: hidden;*/
+	overflow-x: hidden;
 }
 
 #searchBox {
@@ -98,6 +98,10 @@ h1, h2, h3 {
 #recipeFoodImage {
 	margin: 0 auto;
 	/*width: 100px;*/
+}
+
+#commentsContainer {
+	width: 100%;
 }
 
 }
