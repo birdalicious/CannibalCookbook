@@ -1,5 +1,5 @@
 const seedrandom = require("seedrandom");
-const recipes = require("./recipes.json");
+const recipes = require("../data/recipes.json");
 
 function getRecipeData(title, id) {
 	return new Promise((resolve, reject) => {

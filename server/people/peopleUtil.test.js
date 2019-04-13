@@ -1,5 +1,5 @@
-jest.mock("./wikiFetch");
-const wiki = require("./wikiFetch.js");
+jest.mock("../wikiFetch");
+const wiki = require("../wikiFetch.js");
 const peopleUtil = require("./peopleUtil.js");
 
 test("getPageIdsFromSearch", () => {

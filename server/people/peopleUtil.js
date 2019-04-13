@@ -1,4 +1,4 @@
-const wiki = require("./wikiFetch.js");
+const wiki = require("../wikiFetch.js");
 
 function getPageIdsFromSearch(query) {
 	return new Promise((resolve, reject) => {

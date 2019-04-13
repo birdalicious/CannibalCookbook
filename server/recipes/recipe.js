@@ -1,4 +1,4 @@
-const people = require("./people.js");
+const people = require("../people/people.js");
 const util = require("./recipeUtil.js");
 
 function search(query, callback) {

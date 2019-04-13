@@ -1,4 +1,4 @@
-jest.mock("./wikiFetch");
+jest.mock("../wikiFetch");
 const people = require("./people.js");
 
 test("searchByQuery", done => {

@@ -1,4 +1,3 @@
-var data = require("./comments.json");
 const comments = require("./comments.js");
 
 test("getUserComments Existing Comment", () => {

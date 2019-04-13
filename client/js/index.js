@@ -146,6 +146,11 @@ function fillInSearch(body) {
 		return;
 	}
 
+	if(body.status != 200) {
+		searchContainer.innerHTML = "<div id=\"noResults\"> Something went wrong :( </div>";
+		return;
+	}
+
 	for(let i = 0; i < people.length; i += 1) {
 		let time = "";
 		if(people[i].cooksIn > 60) {

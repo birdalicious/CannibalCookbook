@@ -1,4 +1,4 @@
-var comments = require("./comments.json");
+var comments = require("../data/comments.json");
 const seedrandom = require("seedrandom");
 const fs = require("fs");
 
@@ -59,7 +59,7 @@ function submitUserComment(id, name, comment) {
 				comment: comment
 			});
 
-			fs.writeFile("./server/comments.json", JSON.stringify(comments), err => {
+			fs.writeFile("./server/data/comments.json", JSON.stringify(comments), err => {
 				if(err) {
 					reject(err);
 				}
@@ -191,7 +191,7 @@ function generateChains() {
 				comments.chains[character] = chain;
 			}
 
-			fs.writeFile("./server/comments.json", JSON.stringify(comments), err => {
+			fs.writeFile("./server/data/comments.json", JSON.stringify(comments), err => {
 				if(err) {
 					reject(err);
 				}

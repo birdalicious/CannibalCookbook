@@ -1,8 +1,8 @@
 const express = require("express");
 
-const people = require("./server/people.js");
-const recipes = require("./server/recipe.js");
-const comments = require("./server/comments.js");
+const people = require("./server/people/people.js");
+const recipes = require("./server/recipes/recipe.js");
+const comments = require("./server/comments/comments.js");
 
 var bodyParser = require("body-parser");
 

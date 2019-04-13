@@ -1,6 +1,6 @@
-jest.mock("./wikiFetch");
+jest.mock("../wikiFetch");
 const util = require("./recipeUtil.js");
-const people = require("./people.js");
+const people = require("../people/people.js");
 
 test("getRecipeData", done => {
 	return util.getRecipeData("Albert Einstein", 736)

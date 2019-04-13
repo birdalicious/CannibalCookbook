@@ -1,5 +1,5 @@
-jest.mock("./wikiFetch");
-jest.mock("./people");
+jest.mock("../wikiFetch");
+jest.mock("../people/people");
 const recipe = require("./recipe.js");
 
 test("search", done => {

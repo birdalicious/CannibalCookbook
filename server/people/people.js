@@ -1,4 +1,4 @@
-const wiki = require("./wikiFetch.js");
+const wiki = require("../wikiFetch.js");
 const util = require("./peopleUtil.js");
 
 function searchByQuery(query, callback) {
