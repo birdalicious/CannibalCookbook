@@ -4,6 +4,28 @@ var comments = require("./comments.json");
 const seedrandom = require("seedrandom");
 const fs = require("fs");
 
+function getComments(id, callback) {
+	let comments;
+	getCharacterComments(id)
+		.then(characterComments => {
+			comments = characterComments;
+
+			return getUserComments(id);
+		})
+		.then(userComments => {
+			comments.push.apply(comments, userComments);
+
+			callback({
+				status: 200,
+				data: comments
+			});
+		})
+		.catch(err => callback({
+			status: 500,
+			data: err
+		}));
+}
+
 function getUserComments(id) {
 	return new Promise((resolve, reject) => {
 		try{
@@ -105,7 +127,10 @@ function getCharacterComments(id) {
 						}
 					}
 
-					results.push(comment);
+					results.push({
+						name: character,
+						comment: comment
+					});
 				}
 			}
 
@@ -181,6 +206,7 @@ function generateChains() {
 }
 
 module.exports = {
+	getComments: getComments,
 	getUserComments: getUserComments,
 	submitUserComment: submitUserComment,
 	generateChains: generateChains,

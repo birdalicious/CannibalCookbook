@@ -246,26 +246,62 @@ header {
 	text-align: center;
 }
 
+#commentsContainer {
+	background-color: #FFF;
 
-/*.result > .resultImg {
-	width: 125px;
-	height: 125px;
+	width: 608px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 
-	background: transparent no-repeat center;
-  	background-size: cover;
+	margin: 25px auto;
+}
+
+#commentsContainer > h2 {
+	margin-left: 25px;
+	padding-top: 15px;
+}
+
+#commentsMain {
+	padding-bottom: 15px;
+	margin-left: 25px;
+	margin-right: 25px;
+}
+
+.comment {
+	margin-top: 15px;
+}
+
+#addComment {
+	cursor: pointer;
+
+	margin-top: 5px;
+	border-radius: 2px;
+	padding: 5px 10px;
+	width: max-content;
+
+	-webkit-transition: box-shadow .1s;
+	transition: box-shadow .1s;
+}
+
+#addComment:hover {
+	/*background-color: #f9f9f9;*/
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+#addCommentLabel {
+	position: relative;
+	bottom: 5px;
+}
+
+#addCommentForm {
+	padding-right: 25px;
+}
+
+#addCommentForm > form > input {
+	margin-bottom: 5px;
+	padding: 7px 10px;
+}
+
+#commentInput {
 	margin-right: 35px;
-  	float: left;
+	width: 100%
 }
-
-.result > .resultTitle {
-
-}
-
-.resultsCooksIn {
-	display: inline-block;
-}
-
-.resultsServes {
-	display: inline-block;
-	background-color: : #AAA;
-}*/

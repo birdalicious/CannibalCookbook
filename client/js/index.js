@@ -1,7 +1,16 @@
 var searchBox = document.getElementById("searchBox");
 let searchContainer = document.getElementById("searchContainer");
 let recipeContainer = document.getElementById("recipeContainer");
+
+let commentButtonLabel; //= document.getElementById("addCommentLabel");
+let commentButton;// = document.getElementById("addComment");
+let commentsContainer = document.getElementById("commentsContainer");
+let commentForm; //= document.getElementById("addCommentForm");
+
 var searchResults;
+var commentFormActive = false;
+
+let pageId = null;
 
 //Load homepage results
 window.onload = homepage;
@@ -9,6 +18,7 @@ window.onload = homepage;
 function homepage() {
 	recipeContainer.innerHTML = "";
 	searchContainer.innerHTML = "<img src=\"./assets/loading.gif\" id=\"loadingImage\">";
+	commentsContainer.innerHTML = "";
 	
 	fetch("/api/recipes/homepage")
 		.then(response => response.json())
@@ -35,6 +45,7 @@ searchBox.addEventListener("keyup", function(event) {
 		
 		recipeContainer.innerHTML = "";
 		searchContainer.innerHTML = "<img src=\"./assets/loading.gif\" id=\"loadingImage\">";
+		commentsContainer.innerHTML = "";
 
 		fetch("/api/recipes/search/" + query)
 			.then(response => response.text())
@@ -50,9 +61,11 @@ searchBox.addEventListener("keyup", function(event) {
 
 function clickSearchResult() {
 	let id = this.getAttribute("id");
+	pageId = id;
 
 	searchContainer.innerHTML = "<img src=\"./assets/loading.gif\" id=\"loadingImage\">";
 	recipeContainer.innerHTML = "";
+	commentsContainer.innerHTML = "";
 
 	fetch("/api/recipes/recipe/" + id)
 		.then(response => response.text())
@@ -71,7 +84,24 @@ function clickSearchResult() {
 			let recommended = document.getElementsByClassName("recommended");
 			for(let i = 0; i < recommended.length; i += 1) {
 				recommended[i].addEventListener("click", clickSearchResult);
-			}	
+			}
+
+			fetch("/api/comments/" + id)
+				.then(response => response.json()) 
+				.then(body => {
+					if(body.status != 200) {
+						commentsContainer.innerHTML = "<h2>Comments</h2> Something went wrong :(";
+						return;
+					}
+
+					let content = body.data;
+
+					fillInComments(content);
+
+				})
+				.catch(() => {
+					commentsContainer.innerHTML = "<h2>Comments</h2> Something went wrong :(";
+				});
 
 		})
 		.catch(() => {
@@ -79,8 +109,35 @@ function clickSearchResult() {
 		});
 }
 
+function fillInComments(content) {
+	let HTML = "<h2>Comments</h2><div id=\"commentsMain\">";
+	for(let i = 0, length = content.length; i < length; i += 1) {
+		HTML += "<div class =\"comment\">";
+
+		HTML += "<h4>" + content[i].name + "</h4>";
+		HTML += "<p>" + content[i].comment + "</p>";
+
+		HTML += "</div>";
+	}
+
+	HTML += "<div id=\"addCommentForm\"></div>";
+	HTML += "<div id=\"addComment\"><img src=\"./assets/add.svg\" alt=\"\"><span id=\"addCommentLabel\">Add</span></div>";
+
+	HTML += "</div>";
+
+	commentsContainer.innerHTML = HTML;
+
+	commentFormActive = false;
+	commentButtonLabel = document.getElementById("addCommentLabel");
+	commentButton = document.getElementById("addComment");
+	commentForm = document.getElementById("addCommentForm");
+
+	commentButton.addEventListener("click", clickCommentAdd);
+}
+
 function fillInSearch(body) {
 	searchContainer.innerHTML = "";
+	commentsContainer.innerHTML = "";
 
 	let people = body.data;
 
@@ -132,6 +189,7 @@ function fillInSearch(body) {
 }
 
 function fillInRecipe(content) {
+	commentsContainer.innerHTML = "";
 	let HTML = "";
 
 	//Left
@@ -222,4 +280,56 @@ function fillInRecipe(content) {
 
 	searchContainer.innerHTML = "";
 	recipeContainer.innerHTML = HTML;
+}
+
+function clickCommentAdd() {
+	if(commentFormActive) {
+		let data = {id: pageId}
+
+		let nameInput = document.getElementById("nameInput");
+		let commentInput = document.getElementById("commentInput");
+
+		if(!nameInput.value || !commentInput.value) {
+			return;
+		}
+
+		data.name = nameInput.value;
+		data.comment = commentInput.value
+
+		fetch("/api/comments/", {
+			method: "POST",
+			credentials: "same-origin",
+			headers: {
+            	"Content-Type": "application/json",
+        	},
+	        body: JSON.stringify(data),
+	        redirect: "follow"
+		})
+		.then(data => {
+			fetch("/api/comments/" + pageId)
+			.then(response => response.json())
+			.then(body => {
+				fillInComments(body.data);
+			})
+			.catch(() => {
+				commentsContainer.innerHTML = "<h2>Comments</h2> Something went wrong :(";
+			});
+		})
+		.catch(() => {
+					commentsContainer.innerHTML = "<h2>Comments</h2> Something went wrong :(";
+				});
+	} else {
+		let HTML = "";
+
+		HTML += "<br>";
+		HTML += "<form action=\"#\"><input type=\"text\" id=\"nameInput\" placeholder=\"Name\"> <br><input type=\"text\" id=\"commentInput\" placeholder=\"Comment\"></form>";
+
+		commentForm.innerHTML = HTML;
+
+		commentButtonLabel.innerHTML = "Submit";
+
+		commentButton.scrollIntoView();
+
+		commentFormActive = true;
+	}
 }
