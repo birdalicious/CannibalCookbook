@@ -106,7 +106,7 @@ function fillInComments(body) {
 		return;
 	}
 
-	let content = body.data
+	let content = body.data;
 	let HTML = "<h2>Comments</h2><div id=\"commentsMain\">";
 	for(let i = 0, length = content.length; i < length; i += 1) {
 		HTML += "<div class =\"comment\">";
