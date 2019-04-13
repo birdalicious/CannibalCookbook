@@ -1,5 +1,3 @@
-/*eslint no-console: ["error", { allow: ["log","warn", "error"] }] */
-
 var comments = require("./comments.json");
 const seedrandom = require("seedrandom");
 const fs = require("fs");

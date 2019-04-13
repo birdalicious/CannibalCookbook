@@ -284,7 +284,7 @@ function fillInRecipe(content) {
 
 function clickCommentAdd() {
 	if(commentFormActive) {
-		let data = {id: pageId}
+		let data = {id: pageId};
 
 		let nameInput = document.getElementById("nameInput");
 		let commentInput = document.getElementById("commentInput");
@@ -294,30 +294,30 @@ function clickCommentAdd() {
 		}
 
 		data.name = nameInput.value;
-		data.comment = commentInput.value
+		data.comment = commentInput.value;
 
 		fetch("/api/comments/", {
 			method: "POST",
 			credentials: "same-origin",
 			headers: {
-            	"Content-Type": "application/json",
-        	},
-	        body: JSON.stringify(data),
-	        redirect: "follow"
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(data),
+			redirect: "follow"
 		})
-		.then(data => {
-			fetch("/api/comments/" + pageId)
-			.then(response => response.json())
-			.then(body => {
-				fillInComments(body.data);
+			.then(() => {
+				fetch("/api/comments/" + pageId)
+					.then(response => response.json())
+					.then(body => {
+						fillInComments(body.data);
+					})
+					.catch(() => {
+						commentsContainer.innerHTML = "<h2>Comments</h2> Something went wrong :(";
+					});
 			})
 			.catch(() => {
 				commentsContainer.innerHTML = "<h2>Comments</h2> Something went wrong :(";
 			});
-		})
-		.catch(() => {
-					commentsContainer.innerHTML = "<h2>Comments</h2> Something went wrong :(";
-				});
 	} else {
 		let HTML = "";
 

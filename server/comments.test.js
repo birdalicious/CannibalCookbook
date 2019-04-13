@@ -1,15 +1,25 @@
+var data = require("./comments.json");
 const comments = require("./comments.js");
 
-test("dfsgiushgfg", () => {
-	return comments.getCharacterComments(6)
-		.then(results => {
-			console.log(results);
-		})
-		.catch(err => {
-			console.log(err);
-		});
-	// return comments.generateChains()
-	// 	.then(data => {
-	// 		console.log(data);
-	// 	});
+test("getUserComments Existing Comment", () => {
+	return comments.getUserComments(28089486)
+	.then(comments => {
+		expect(comments[0]).toHaveProperty("name")
+		expect(comments[0]).toHaveProperty("comment")
+	})
 });
+
+test("getUserComments Non-Existing Comment", () => {
+	return comments.getUserComments(1)
+	.then(comments => {
+		expect(comments.length).toBe(0);
+	})
+});
+
+test("getCharacterComments", () => {
+	return comments.getCharacterComments(1)
+	.then(comments => {
+		expect(comments[0]).toHaveProperty("name")
+		expect(comments[0]).toHaveProperty("comment")
+	})
+})
