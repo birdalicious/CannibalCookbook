@@ -63,6 +63,13 @@ app.get("/api/comments/:query/", function(req, resp){
 });
 
 app.post("/api/comments", function(req, resp){
+	if(!req.body.id || !req.body.name || !req.body.comment) {
+		resp.status(400).send({
+			status: 400,
+			data: "Not all required fields provided"
+		});
+	}
+
 	comments.submitUserComment(
 		req.body.id,
 		req.body.name,
@@ -70,7 +77,8 @@ app.post("/api/comments", function(req, resp){
 		.then(response => {
 			if(response == 200 || response == 201) {
 				return resp.status(response).send({
-					status: response
+					status: response,
+					data: {}
 				});
 			
 			} else {

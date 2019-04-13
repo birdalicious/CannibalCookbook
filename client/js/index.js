@@ -2,10 +2,10 @@ var searchBox = document.getElementById("searchBox");
 let searchContainer = document.getElementById("searchContainer");
 let recipeContainer = document.getElementById("recipeContainer");
 
-let commentButtonLabel; //= document.getElementById("addCommentLabel");
-let commentButton;// = document.getElementById("addComment");
+let commentButtonLabel;
+let commentButton;
 let commentsContainer = document.getElementById("commentsContainer");
-let commentForm; //= document.getElementById("addCommentForm");
+let commentForm;
 
 var searchResults;
 var commentFormActive = false;
@@ -77,9 +77,7 @@ function clickSearchResult() {
 				return;
 			}
 
-			let content = body.data;
-
-			fillInRecipe(content);
+			fillInRecipe(body);
 
 			let recommended = document.getElementsByClassName("recommended");
 			for(let i = 0; i < recommended.length; i += 1) {
@@ -89,14 +87,7 @@ function clickSearchResult() {
 			fetch("/api/comments/" + id)
 				.then(response => response.json()) 
 				.then(body => {
-					if(body.status != 200) {
-						commentsContainer.innerHTML = "<h2>Comments</h2> Something went wrong :(";
-						return;
-					}
-
-					let content = body.data;
-
-					fillInComments(content);
+					fillInComments(body);
 
 				})
 				.catch(() => {
@@ -109,7 +100,13 @@ function clickSearchResult() {
 		});
 }
 
-function fillInComments(content) {
+function fillInComments(body) {
+	if(body.status != 200) {
+		commentsContainer.innerHTML = "<h2>Comments</h2> Something went wrong :(";
+		return;
+	}
+
+	let content = body.data
 	let HTML = "<h2>Comments</h2><div id=\"commentsMain\">";
 	for(let i = 0, length = content.length; i < length; i += 1) {
 		HTML += "<div class =\"comment\">";
@@ -193,7 +190,9 @@ function fillInSearch(body) {
 	}
 }
 
-function fillInRecipe(content) {
+function fillInRecipe(body) {
+	let content = body.data;
+
 	commentsContainer.innerHTML = "";
 	let HTML = "";
 
