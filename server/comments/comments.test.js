@@ -21,4 +21,4 @@ test("getCharacterComments", () => {
 		expect(comments[0]).toHaveProperty("name")
 		expect(comments[0]).toHaveProperty("comment")
 	})
-})
+});

@@ -38,7 +38,7 @@ function search(query, callback) {
 }
 
 function homepageSearch(callback) {
-	let ids = [6873934, 63390, 10489, 102994, 104940, 166103, 636344];
+	let ids = [6873934, 63390, 104940, 166103, 161570];
 	people.searchByPageIds(ids, (results) => {
 		if(results.status != 200) {
 			callback({

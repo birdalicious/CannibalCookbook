@@ -119,7 +119,7 @@ function getCharacterComments(id) {
 						comment.push(next);
 						
 						let lastCharacter = next[next.length -1];
-						if((lastCharacter == "." || lastCharacter == "?" || lastCharacter == "!") && rng() < 0.75) {
+						if(((lastCharacter == "." || lastCharacter == "?" || lastCharacter == "!") && rng() < 0.75) || comment.length > 35) {
 							comment = comment.join(" ");
 							condition = false;
 						}
