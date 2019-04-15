@@ -7,7 +7,6 @@ function getComments(id, callback) {
 	getCharacterComments(id)
 		.then(characterComments => {
 			comments = characterComments;
-
 			return getUserComments(id);
 		})
 		.then(userComments => {
@@ -115,7 +114,7 @@ function getCharacterComments(id) {
 						if(!next) {
 							next = following[thresholds[thresholds.length - 1]];
 						}
-						// console.log(next);
+						
 						comment.push(next);
 						
 						let lastCharacter = next[next.length -1];

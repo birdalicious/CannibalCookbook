@@ -313,7 +313,7 @@ function clickCommentAdd() {
 				fetch("/api/comments/" + pageId)
 					.then(response => response.json())
 					.then(body => {
-						fillInComments(body.data);
+						fillInComments(body);
 					})
 					.catch(() => {
 						commentsContainer.innerHTML = "<h2>Comments</h2> Something went wrong :(";

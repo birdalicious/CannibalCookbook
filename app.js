@@ -68,6 +68,7 @@ app.post("/api/comments", function(req, resp){
 			status: 400,
 			data: "Not all required fields provided"
 		});
+		return;
 	}
 
 	comments.submitUserComment(
