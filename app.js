@@ -98,9 +98,4 @@ app.post("/api/comments", function(req, resp){
 	
 });
 
-app.get("/api/refresh/comments", function(req, resp){
-	comments.generateChains()
-		.then(data => resp.send(data));
-});
-
 module.exports = app;
