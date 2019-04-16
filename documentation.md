@@ -114,8 +114,3 @@ Submit a comment.
 #### Response *JSON*
 * `status` **number** the status code of the response. 201 if the comment was submitted, 200 if the comment already existed.
 * `data` blank object if everything went well, can be an error, string, or blank depending on the error that occured.
-
-### `/api/refresh/comments` *GET*
-Recalculates the data required to generate the comments.
-#### Response *CODE*
-HTTP code depending on what happened.
