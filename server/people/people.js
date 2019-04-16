@@ -171,11 +171,10 @@ function getPageInfo(id, callback) {
 				data: result
 			});
 		})
-		.catch(err =>
-			callback({
-				status: 500,
-				data: err
-			}));
+		.catch(err => callback({
+			status: 500,
+			data: err
+		}));
 }
 
 
