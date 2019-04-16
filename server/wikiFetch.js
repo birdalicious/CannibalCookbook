@@ -13,24 +13,24 @@ function convertQueryArrayToString(queries) {
 
 function searchFetch(query) {
 	let searchURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=";
-	return fetch(encodeURI(searchURL + query));
+	return fetch(searchURL + encodeURI(query));
 }
 
 function pagesByIdFetch(queries) {
 	let pagesByIdURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&rvprop=content&rvsection=0&pageids=";
 	let stringQueries = convertQueryArrayToString(queries);
-	return fetch(encodeURI(pagesByIdURL + stringQueries));
+	return fetch(pagesByIdURL + encodeURI(stringQueries));
 }
 
 function pagesByTitleFetch(stringQueries) {
 	let pagesByTitleURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&rvsection=0&rvprop=content&titles=";
-	return fetch(encodeURI(pagesByTitleURL + stringQueries));
+	return fetch(pagesByTitleURL + encodeURI(stringQueries));
 }
 
 function imagesByIdFetch(queries) {
 	let imagesURL = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&piprop=name|thumbnail&pithumbsize=300&pageids=";
 	let stringQueries = convertQueryArrayToString(queries);
-	return fetch(encodeURI(imagesURL + stringQueries));
+	return fetch(imagesURL + encodeURI(stringQueries));
 }
 
 
