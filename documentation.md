@@ -106,6 +106,7 @@ Submit a comment.
 
 #### Encoded Variables *JSON*
 * `id` **number** the id of the page the comment is associated with.
+* `auth` **string** auth code to allow you to edit server resources.
 * `name` **string** your name.
 * `comment` **string** your comment.
 

@@ -3,6 +3,7 @@ const express = require("express");
 const people = require("./server/people/people.js");
 const recipes = require("./server/recipes/recipe.js");
 const comments = require("./server/comments/comments.js");
+const auth = require("./server/auth.js");
 
 var bodyParser = require("body-parser");
 
@@ -63,10 +64,18 @@ app.get("/api/comments/:query/", function(req, resp){
 });
 
 app.post("/api/comments", function(req, resp){
-	if(!req.body.id || !req.body.name || !req.body.comment) {
+	if(!req.body.id || !req.body.auth || !req.body.name || !req.body.comment) {
 		resp.status(400).send({
 			status: 400,
 			data: "Not all required fields provided"
+		});
+		return;
+	}
+
+	if(!auth(req.body.auth)) {
+		resp.status(403).send({
+			status: 403,
+			data: "Invalid auth code"
 		});
 		return;
 	}

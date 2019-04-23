@@ -288,7 +288,7 @@ function fillInRecipe(body) {
 
 function clickCommentAdd() {
 	if(commentFormActive) {
-		let data = {id: pageId};
+		let data = {id: pageId, auth: "111"};
 
 		let nameInput = document.getElementById("nameInput");
 		let commentInput = document.getElementById("commentInput");
