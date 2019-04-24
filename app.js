@@ -3,7 +3,7 @@ const express = require("express");
 const people = require("./server/people/people.js");
 const recipes = require("./server/recipes/recipe.js");
 const comments = require("./server/comments/comments.js");
-const auth = require("./server/auth.js");
+var Auth = require("./server/auth.js");
 
 var bodyParser = require("body-parser");
 
@@ -35,6 +35,28 @@ app.get("/api/recipes/homepage", function(req, resp){
 		return resp.status(data.status).send(data);
 	});
 });
+
+app.post("/api/recipes/add", function(req, resp){
+	if(!req.body.auth || !req.body.recipe) {
+		resp.status(400).send({status: 400, data: "missing data"});
+		return;
+	}
+
+	let auth = new Auth(req.body.auth);
+
+	if(!auth.canModifyRecipes) {
+		resp.status(403).send({status: 403, data: "don't have permission"});
+		return;
+	}
+
+	recipes.addRecipe(JSON.parse(req.body.recipe))
+	.then(response => {
+		resp.status(200).send({status: 200, data: {}});
+	})
+	.catch(err => {
+		resp.status(500).send({status: 500, data: err});
+	})
+})
 
 
 
@@ -72,7 +94,9 @@ app.post("/api/comments", function(req, resp){
 		return;
 	}
 
-	if(!auth(req.body.auth)) {
+	let auth = new Auth(req.body.auth);
+
+	if(!auth.canComment) {
 		resp.status(403).send({
 			status: 403,
 			data: "Invalid auth code"
@@ -106,5 +130,35 @@ app.post("/api/comments", function(req, resp){
 		});
 	
 });
+
+
+app.post("/auth/update", function(req, resp) {
+	if(!req.body.auth || !req.body.changeAuth || !req.body.permissions) {
+		resp.status(400).send({
+			status: 400,
+			data: "Missing data"
+		});
+		return;
+	}
+
+	let auth = new Auth(req.body.auth);
+
+	if(!auth.canModifyAuth) {
+		resp.status(403).send({
+			status: 403,
+			data: "Don't have the permission to modify"
+		});
+		return;
+	}
+
+	auth.modifyAuth(req.body.changeAuth, req.body.permissions)
+	.then(response => {
+		resp.status(response.status).send(response);
+	})
+	.catch(err => {
+		resp.status(err.status).send(err);
+	})
+
+})
 
 module.exports = app;

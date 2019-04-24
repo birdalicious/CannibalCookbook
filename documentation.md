@@ -86,6 +86,26 @@ Gets the full recipe of a person and some simple recipe information of related p
 		* `title` **string** title of the recipe.
 		* `image` **string** url of an image of the person or the food dish depending on what data is available.
 
+### `/api/recipes/add/` *POST*
+Adds a new recipe template to the server. the recipe will be served via get requests when the server restarts
+#### Encoded Variables *JSON*
+`auth` **string** your auth code, if you don't have permissiosn to edit recipes your request will be declined.
+`recipe` **object** the recipe template which has all the fields in the form 
+```javascript
+{
+	"title": "",
+	"intro": "",
+	"image": "",
+	"serves": 0,
+	"cooksIn": 0,
+	"ingredients": [""],
+	"method": [""]
+}
+```
+
+#### Response
+If your request is successfull, you will get a 200 code otherwise error codes will come back.
+
 ## Comments Endpoints:
 Get and post user submitted comments for specific recipes and also get some generated comments.
 
@@ -115,3 +135,17 @@ Submit a comment.
 #### Response *JSON*
 * `status` **number** the status code of the response. 201 if the comment was submitted, 200 if the comment already existed.
 * `data` blank object if everything went well, can be an error, string, or blank depending on the error that occured.
+
+## Auth Endpoint:
+Update permissions.
+
+### `/auth/update` *POST*
+Add or update an auth code.
+
+#### Encoded Variables *JSON*
+`auth` **string** your authentication code
+`changeAuth` **string** the auth code you wish to create or update
+`permissions` **object** in the form
+```javascript
+{"commenting": true, "recipe": true, "auth": false}
+```

@@ -1,5 +1,6 @@
 const people = require("../people/people.js");
 const util = require("./recipeUtil.js");
+var recipes = require("../data/recipes.json");
 
 function search(query, callback) {
 	let peopleData;
@@ -142,8 +143,41 @@ function getRecipe(id, callback) {
 	});
 }
 
+function addRecipe(recipe) {
+	return new Promise((resolve, reject) => {
+		try {
+			if(!recipe.title ||
+				!recipe.intro ||
+				!recipe.image ||
+				!recipe.serves ||
+				!recipe.cooksIn ||
+				!recipe.ingredients ||
+				!recipe.method) {
+				reject("Incomplete data");
+				return;
+			}
+
+			recipes.generator.push(recipe);
+			recipes.length = recipes.length + 1;
+
+			fs.writeFile("./server/data/recipes.json", JSON.stringify(recipes), (err) => {
+				if(err) {
+					reject(err);
+					return;
+				}
+
+				resolve(200);
+			})
+
+		} catch(err) {
+			reject(err);
+		}
+	})
+}
+
 module.exports = {
 	search: search,
 	homepageSearch: homepageSearch,
-	getRecipe: getRecipe
+	getRecipe: getRecipe,
+	addRecipe: addRecipe
 };
