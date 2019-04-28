@@ -1,14 +1,6 @@
 var auths = require("./data/auths.json");
 const fs = require("fs");
 
-function isAuth(code) {
-	if(auths[code] && auths[code] == true) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
 module.exports = class Auth {
 	constructor(authCode) {
 		if(auths[authCode]) {
@@ -67,11 +59,10 @@ module.exports = class Auth {
 					});
 				});
 			} catch(err) {
-				console.log(err)
 				reject({
 					status: 500,
 					data: err
-				})
+				});
 			}
 		});
 	}

@@ -50,13 +50,13 @@ app.post("/api/recipes/add", function(req, resp){
 	}
 
 	recipes.addRecipe(JSON.parse(req.body.recipe))
-	.then(response => {
-		resp.status(200).send({status: 200, data: {}});
-	})
-	.catch(err => {
-		resp.status(500).send({status: 500, data: err});
-	})
-})
+		.then(() => {
+			resp.status(200).send({status: 200, data: {}});
+		})
+		.catch(err => {
+			resp.status(500).send({status: 500, data: err});
+		});
+});
 
 
 
@@ -152,13 +152,13 @@ app.post("/auth/update", function(req, resp) {
 	}
 
 	auth.modifyAuth(req.body.changeAuth, req.body.permissions)
-	.then(response => {
-		resp.status(response.status).send(response);
-	})
-	.catch(err => {
-		resp.status(err.status).send(err);
-	})
+		.then(response => {
+			resp.status(response.status).send(response);
+		})
+		.catch(err => {
+			resp.status(err.status).send(err);
+		});
 
-})
+});
 
 module.exports = app;
