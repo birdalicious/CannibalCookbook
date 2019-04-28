@@ -1,3 +1,4 @@
+const fs = require("fs");
 const people = require("../people/people.js");
 const util = require("./recipeUtil.js");
 var recipes = require("../data/recipes.json");
@@ -167,12 +168,12 @@ function addRecipe(recipe) {
 				}
 
 				resolve(200);
-			})
+			});
 
 		} catch(err) {
 			reject(err);
 		}
-	})
+	});
 }
 
 module.exports = {
