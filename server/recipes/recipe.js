@@ -1,3 +1,4 @@
+const fs = require("fs");
 const people = require("../people/people.js");
 const util = require("./recipeUtil.js");
 var recipes = require("../data/recipes.json");
