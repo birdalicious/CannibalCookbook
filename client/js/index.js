@@ -263,7 +263,7 @@ function fillInRecipe(body) {
 	//Right
 	HTML += "<div id=\"recipeRight\">";
 
-	HTML += "<h2>Recommened</h2>";
+	HTML += "<h2>Recommended</h2>";
 
 	if(content.related.length > 0) {
 		for(let i = 0, related = content.related, length = related.length > 4? 4: related.length; i < length; i += 1) {
