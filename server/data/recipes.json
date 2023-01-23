@@ -1,5 +1,5 @@
 {  
-   "length":9,
+   "length":13,
    "generator":[  
       {  
          "title":"(*) panzanella",
@@ -257,13 +257,72 @@
             "Peel and finely slice the garlic. Pick the basil leaves, then finely chop the stalks.",
             "Heat a splash of oil in a medium saucepan over a medium heat. Add the garlic and basil stalks and cook for 2 minutes, or until golden.",
             "Tip the tinned tomatoes into the pan and squash them down with the back of a spoon. Fill the empty tomato tin with water and pour this in too. Season and simmer for 30 minutes, or until reduced, glossy and thick.",
-            "Place the (*) breasts on a board and cover with a double layer of clingfilm. Bash with a saucepan to flatten them to 5mm thick.",
+            "Place (*)'s breasts on a board and cover with a double layer of clingfilm. Bash with a saucepan to flatten them to 5mm thick.",
             "Tip the flour into one bowl, then crack and beat the eggs in a second bowl. Add the breadcrumbs to a third, finely grate in half of the Parmesan, then shake to combine.",
             "Coat (*) in the flour, then the egg and finally in the cheesy breadcrumbs, until thoroughly coated.",
             "Heat a lug of oil in a large frying pan over a medium heat and cook (*) for 3 to 4 mins on each side, or until golden and the meat is cooked through.",
             "Cook the spaghetti according to the packet instructions, then drain and add to the tomato sauce, loosening with a little of the cooking water if needed.",
             "Serve the pasta alongside the crispy (*), with the remaining Parmesan and basil leaves scattered over."
          ]
-      }
+      },
+      {
+         "title": "Spaghetti & (*) Bolognese",
+         "intro": "A classic Italian dish made with ground (*) and tomato sauce served over spaghetti pasta.",
+         "image": "https://www.vickery.tv/wp-content/uploads/2020/12/SMGD-Spaghetti-Bolognese.jpg",
+         "serves": 4,
+         "cooksIn": 45,
+         "ingredients": ["1 pound spaghetti", "1 pound ground (*)", "1 onion, diced", "3 cloves of garlic, minced", "1 can of crushed tomatoes", "1 tablespoon dried basil", "salt and pepper to taste"],
+         "method": ["Cook spaghetti according to package instructions until al dente.", "In a separate pan, brown ground (*) over medium heat.", "Add diced onion and minced garlic to the pan and cook until softened.", "Add crushed tomatoes, basil, salt, and pepper to the pan and bring to a simmer.", "Let the sauce cook for 15-20 minutes, or until thickened.", "Serve the sauce over the cooked spaghetti."]
+     },
+     {
+      "title": " (*) Wellington",
+      "intro": "An elegant British dish made with a filet of (*) wrapped in puff pastry and served with a red wine reduction.",
+      "image": "https://static01.nyt.com/images/2019/12/13/dining/mc-beef-wellington/mc-beef-wellington-master768-v2.jpg?w=1280&q=75",
+      "serves": 4,
+      "cooksIn": 90,
+      "ingredients": ["1 (2-pound) (*) tenderloin", "Salt and pepper", "1 tablespoon olive oil", "8 ounces mushrooms, finely chopped", "1 shallot, finely chopped", "2 cloves of garlic, minced", "1/4 cup red wine", "1 sheet puff pastry, thawed", "1 egg, beaten", "1 tablespoon Dijon mustard"],
+      "method": ["Preheat the oven to 425 degrees F (220 degrees C).",
+      "Season the (*) tenderloin with salt and pepper.",
+      "Heat the olive oil in a pan over medium-high heat. Add the mushrooms, shallot, and garlic and sauté for 5 minutes.",
+      "Add the red wine and cook for an additional 2 minutes, or until the liquid has reduced.",
+      "Remove the pan from the heat and let the mushroom mixture cool.",
+      "Roll out the puff pastry to a thickness of 1/8 inch and place it on a lightly floured surface.",
+      "Spread the Dijon mustard on the puff pastry.",
+      "Place the (*) tenderloin on the puff pastry and spread the cooled mushroom mixture over the (*).",
+      "Roll up the puff pastry to enclose (*) and mushrooms, and seal the edges.",
+      "Place the (*) Wellington on a baking sheet, brush with the beaten egg and make a few slits on the top.",
+      "Bake the (*) Wellington for 25 to 30 minutes, or until the puff pastry is golden brown and (*) is cooked to your desired level of doneness.",
+      "Remove from the oven, let it rest for 10 minutes before slicing and serving with red wine reduction."]
+  },
+  {
+   "title": "Lemon and Garlic (*)",
+   "intro": "A simple and flavorful dish made with (*), lemon, and garlic. Perfect as an appetizer or main course.",
+   "image": "https://healthyfitnessmeals.com/wp-content/uploads/2020/07/Garlic-lemon-shrimp-skillet-8.jpg",
+   "serves": 4,
+   "cooksIn": 15,
+   "ingredients": ["1 pound (*), peeled and deveined", "4 cloves of garlic, minced", "1/4 cup olive oil", "1/4 cup lemon juice", "1 teaspoon dried oregano", "Salt and pepper", "1 tablespoon chopped parsley"],
+   "method": ["In a small bowl, mix together the minced garlic, olive oil, lemon juice, oregano, salt and pepper.",
+   "Add (*) to the marinade, toss to coat evenly, and let marinate in the refrigerator for at least 15 minutes.",
+   "Heat a skillet over medium-high heat and add (*) and the marinade.",
+   "Cook (*) for 2-3 minutes per side, or until they turn pink and are cooked through.",
+   "Remove the skillet from the heat, and stir in the chopped parsley.",
+   "Serve (*) hot, with additional lemon wedges on the side, if desired."]
+},
+{
+   "title": "(*) Chow Mein",
+   "intro": "A classic Chinese dish made with stir-fried noodles, (*), and vegetables in a savory sauce.",
+   "image": "https://natashaskitchen.com/wp-content/uploads/2020/03/Chicken-Chow-Mein-3-728x1092.jpg",
+   "serves": 4,
+   "cooksIn": 20,
+   "ingredients": ["8 oz. chow mein noodles", "1 lb. boneless (*), cut into thin strips", "1 tbsp. vegetable oil", "2 cloves of garlic, minced", "1/2 cup sliced onion", "1 cup sliced carrots", "1 cup sliced celery", "1 cup sliced cabbage", "1/4 cup soy sauce", "2 tbsp. oyster sauce", "2 tbsp. rice vinegar", "1 tsp. sugar", "1/4 tsp. white pepper"],
+   "method": ["Cook the chow mein noodles according to package instructions, then drain and set aside.", 
+   "In a large skillet or wok, heat the vegetable oil over high heat. Add the (*) and stir-fry for 2-3 minutes, or until browned and cooked through.",
+   "Add the garlic, onion, carrots, celery, and cabbage and stir-fry for an additional 2-3 minutes, or until the vegetables are slightly softened.",
+   "In a small bowl, whisk together the soy sauce, oyster sauce, rice vinegar, sugar, and white pepper.",
+   "Add the sauce to the skillet and stir until the vegetables and (*) are well coated.",
+   "Add the cooked chow mein noodles to the skillet and toss everything together until the noodles are heated through and well coated with the sauce.",
+   "Serve the (*) chow mein hot, with additional soy sauce and/or Sriracha sauce on the side, if desired."
+]
+}
    ]
 }
