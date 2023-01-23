@@ -1,6 +1,11 @@
 const seedrandom = require("seedrandom");
 const recipes = require("../data/recipes.json");
 
+String.prototype.replaceAll = function(str1, str2, ignore) 
+{
+    return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
+} 
+
 function getRecipeData(title, id) {
 	return new Promise((resolve, reject) => {
 		try {
@@ -24,10 +29,10 @@ function getRecipeData(title, id) {
 			result.method = [];
 
 			for(let i = 0; i < recipe.ingredients.length; i += 1) {
-				result.ingredients[i] = recipe.ingredients[i].replace("(*)", title);
+				result.ingredients[i] = recipe.ingredients[i].replaceAll("(*)", title);
 			}
 			for(let i = 0; i < recipe.method.length; i += 1) {
-				result.method[i] = recipe.method[i].replace("(*)", title);
+				result.method[i] = recipe.method[i].replaceAll("(*)", title);
 			}
 
 			resolve(result);
